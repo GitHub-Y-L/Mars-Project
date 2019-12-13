@@ -12,5 +12,10 @@ namespace Mars_Project.Controllers
         {
             return View();
         }
+
+        public ActionResult dele()
+        {
+            return View();
+        }
     }
 }
