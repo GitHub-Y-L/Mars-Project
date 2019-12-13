@@ -13,7 +13,7 @@ namespace Mars_Project.Controllers
             return View();
         }
 
-        public ActionResult Index()
+        public ActionResult List()
         {
             return View();
         }
