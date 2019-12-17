@@ -13,10 +13,24 @@
     <script src="~/Content/ueditor/ueditor.all.min.js"></script>
     <script src="~/Content/ueditor/lang/zh-cn/zh-cn.js"></script>
 
-    @using (Html.BeginForm("UeTest", "TrainInfo", FormMethod.Post)) {
-        <textarea id="editor" name="editor"></textarea>
-        <input style="display:none" id="SubmitBtn" type="submit" value="提交" />
-    }
+    <form class="layui-form" action="" style="margin-top:20px" id="form1">
+        <div class="layui-form-item">
+            <label class="layui-form-label">标题</label>
+            <div class="layui-input-inline">
+                <input type="text" name="Title" required lay-verify="required" autocomplete="off" class="layui-input">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">描述</label>
+            <div class="layui-input-inline">
+                <input type="text" name="Value" required lay-verify="required" autocomplete="off" class="layui-input">
+            </div>
+            <div class="layui-form-mid layui-word-aux"> </div>
+        </div>
+
+        <textarea id="UEValue" name="UEValue"></textarea>
+        <input style="display:none" id="SubmitBtn" type="submit" lay-filter="formDemo" value="提交" />
+    </form>
 
     <script type="text/javascript">
         var editor = new baidu.editor.ui.Editor({
@@ -24,7 +38,7 @@
             autoHeightEnabled: true,//高度自动增长
             minFrameHeight: 700//最小高度
         });
-        editor.render('editor');
+        editor.render('UEValue');
     </script>
 
 </div>
@@ -40,33 +54,33 @@
     }
 
     //初始化表单使用
-    //layui.use(['form', 'jquery'], function () {
-    //    var form = layui.form
-    //        , $ = layui.jquery;
+    layui.use(['form', 'jquery'], function () {
+        var form = layui.form
+            , $ = layui.jquery;
 
-    //    //监听提交
-    //    form.on('submit(formDemo)', function (data) {
-    //        $.ajax({
-    //            url: '/Home/DoAddStuInfo' //提交的地址
-    //            , type: 'post' //提交的方式
-    //            , data: $("#form1").serialize() //提交的数据
-    //            , dataType: 'json' // 返回值类型
-    //            , success: function (res) { //请求成功时执行
-    //                if (res.code > 0) {
-    //                    layer.alert('添加成功！', function (index) {
-    //                        layer.close(index);
-    //                        var index = parent.layer.getFrameIndex(window.name); //先得到当前iframe层的索引
-    //                        parent.layer.close(index); //再执行关闭
-    //                        parent.tableIns.reload();
-    //                    });
+        //监听提交
+        form.on('submit(formDemo)', function (data) {
+            $.ajax({
+                url: '/TrainInfo/DoAddInfo' //提交的地址
+                , type: 'post' //提交的方式
+                , data: $("#form1").serialize() //提交的数据
+                , dataType: 'json' // 返回值类型
+                , success: function (res) { //请求成功时执行
+                    if (res.code > 0) {
+                        layer.alert('添加成功！', function (index) {
+                            layer.close(index);
+                            var index = parent.layer.getFrameIndex(window.name); //先得到当前iframe层的索引
+                            parent.layer.close(index); //再执行关闭
+                            parent.tableIns.reload();
+                        });
 
-    //                }
-    //            }
-    //        });
-    //        return false;
-    //    });
+                    }
+                }
+            });
+            return false;
+        });
 
-    //});
+    });
 
 
 </script>
