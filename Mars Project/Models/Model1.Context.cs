@@ -13,10 +13,10 @@ namespace Mars_Project.Models
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class MarsProjectDBEntities : DbContext
+    public partial class MPEntities : DbContext
     {
-        public MarsProjectDBEntities()
-            : base("name=MarsProjectDBEntities")
+        public MPEntities()
+            : base("name=MPEntities")
         {
         }
     
@@ -25,9 +25,9 @@ namespace Mars_Project.Models
             throw new UnintentionalCodeFirstException();
         }
     
-        public virtual DbSet<AdminInfo> AdminInfo { get; set; }
-        public virtual DbSet<NavMenu> NavMenu { get; set; }
-        public virtual DbSet<SceneryInfo> SceneryInfo { get; set; }
-        public virtual DbSet<TrainInfo> TrainInfo { get; set; }
+        public virtual DbSet<AdminInfo> AdminInfoes { get; set; }
+        public virtual DbSet<NavMenu> NavMenus { get; set; }
+        public virtual DbSet<SceneryInfo> SceneryInfoes { get; set; }
+        public virtual DbSet<TrainInfo> TrainInfoes { get; set; }
     }
 }

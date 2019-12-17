@@ -16,9 +16,9 @@ namespace Mars_Project.Controllers
         }
 
         public ActionResult GetPageInfo(int page, int limit) {
-            var db = new MarsProjectDBEntities();
-            int countData = db.TrainInfo.Count();
-            List<TrainInfo> dataList = db.TrainInfo
+            var db = new MPEntities();
+            int countData = db.TrainInfoes.Count();
+            List<TrainInfo> dataList = db.TrainInfoes
                 .OrderBy(s => s.Id)
                 .Skip((page - 1) * limit)
                 .Take(limit)
@@ -40,7 +40,7 @@ namespace Mars_Project.Controllers
         [HttpPost]
         [ValidateInput(false)]
         public ActionResult DoAddInfo(TrainInfo trainInfo) {
-            var db = new MarsProjectDBEntities();
+            var db = new MPEntities();
             //db.TrainInfo.Add(trainInfo);
             //var codeData = db.SaveChanges();
             //var msg = new {

@@ -15,8 +15,12 @@ namespace Mars_Project.Models
     public partial class TrainInfo
     {
         public int Id { get; set; }
+        public string Title { get; set; }
         public string Value { get; set; }
         public string TopBanner { get; set; }
         public string UEValue { get; set; }
+        public int IsDele { get; set; }
+        public Nullable<System.DateTime> CreateTime { get; set; }
+        public Nullable<System.DateTime> ModifyTime { get; set; }
     }
 }
