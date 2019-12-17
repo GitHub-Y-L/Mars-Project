@@ -14,8 +14,4 @@ namespace Mars_Project.Controllers
         }
     }
 
-    public ActionResult li()
-    {
-        return View();
-    }
 }
