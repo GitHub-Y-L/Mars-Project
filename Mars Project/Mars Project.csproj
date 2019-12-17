@@ -124,8 +124,36 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\BackstageController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\TrainInfoController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
+    </Compile>
+    <Compile Include="Models\AdminInfo.cs">
+      <DependentUpon>MarsProjectModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\MarsProjectModel.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>MarsProjectModel.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\MarsProjectModel.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>MarsProjectModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\MarsProjectModel.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>MarsProjectModel.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="Models\NavMenu.cs">
+      <DependentUpon>MarsProjectModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\SceneryInfo.cs">
+      <DependentUpon>MarsProjectModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\TrainInfo.cs">
+      <DependentUpon>MarsProjectModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -311,6 +339,16 @@
     <Content Include="layui\lay\modules\tree.js" />
     <Content Include="layui\lay\modules\upload.js" />
     <Content Include="layui\lay\modules\util.js" />
+    <Content Include="Models\MarsProjectModel.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>MarsProjectModel.edmx</DependentUpon>
+      <LastGenOutput>MarsProjectModel.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="Models\MarsProjectModel.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>MarsProjectModel.edmx</DependentUpon>
+      <LastGenOutput>MarsProjectModel.cs</LastGenOutput>
+    </Content>
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Content\HomeAssets\fonts\fontawesome-webfont.eot" />
@@ -327,6 +365,13 @@
     <Content Include="assets\fonts\fontawesome-webfont.woff" />
     <Content Include="assets\fonts\FontAwesome.otf" />
     <Content Include="assets\js\fancybox\Descr.WD3" />
+    <EntityDeploy Include="Models\MarsProjectModel.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>MarsProjectModel.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <Content Include="Models\MarsProjectModel.edmx.diagram">
+      <DependentUpon>MarsProjectModel.edmx</DependentUpon>
+    </Content>
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.3.1.js" />
     <Content Include="Scripts\jquery-3.3.1.min.js" />
@@ -355,10 +400,11 @@
     <Content Include="Views\Shared\_LayoutBackstage.cshtml" />
     <Content Include="Views\Backstage\Index.cshtml" />
     <Content Include="Views\Backstage\_ViewStart.cshtml" />
+    <Content Include="Views\TrainInfo\Index.cshtml" />
+    <Content Include="Views\TrainInfo\_ViewStart.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Models\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
