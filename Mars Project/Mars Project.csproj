@@ -672,13 +672,14 @@
     <Content Include="Views\TrainInfo\Index.cshtml" />
     <Content Include="Views\TrainInfo\_ViewStart.cshtml" />
     <Content Include="Views\TrainInfo\AddInfo.cshtml" />
+    <Content Include="Views\TrainInfo\ModifyInfo.cshtml" />
     <Content Include="Views\SceneryInfo\Index.cshtml" />
     <Content Include="Views\SceneryInfo\_ViewStart.cshtml" />
     <Content Include="Views\SceneryInfo\Add.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Content\ueditor\net\upload\" />
+    <Folder Include="Content\ueditor\net\upload\image\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
