@@ -1,0 +1,96 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>景点管理</h2>
+
+<table class="layui-hide" id="test" lay-filter="test"></table>
+<script type="text/html" id="toolbar">
+    <div class="layui-btn-container">
+        <button class="layui-btn layui-btn-sm" lay-even="add">添加</button>
+    </div>
+</script>
+<script type="text/html" id="bar">
+    <a class="layui-btn layui-btn-xs" lay-even="update">修改</a>
+    <a class="layui-btn layui-btn-danger layui-btn-xs" lay-even="delete">删除</a>
+</script>
+
+<script>
+    layui.use(['table', 'jquery'], function () {
+        var table = layui.table;
+        var $ = layui.jquery;
+
+        table.render({
+            elem: '#test'
+            , url: '/SceneryInfo/Select' //数据接口
+            , cols: [[ //表头
+                { field: 'Id', title: 'ID', sort: true, fixed: 'left' }
+                , { field: 'Title', title: '景点标题' }
+                , { field: 'Value', title: '描述内容' }
+                , { field: 'TopBanner', title: '图片' }
+                , { field: 'UEValue', title: '富文本' }
+                , {
+                    field: 'CreateTime', title: '创建时间', templet: function (r) {
+                        var val = r.CreateTime;
+                        if (val != null) {
+                            var date = new Date(parseInt(val.replace("/Date(", "").replace(")/", ""), 10));
+                            //月份为0-11，所以+1，月份小于10时补个0
+                            var month = date.getMonth() + 1 < 10 ? "0" + (date.getMonth() + 1) : date.getMonth() + 1;
+                            var currentDate = date.getDate() < 10 ? "0" + date.getDate() : date.getDate();
+                            return date.getFullYear() + "-" + month + "-" + currentDate;
+                        }
+                        return "";
+                    }
+                }
+                , {
+                    field: 'ModifyTime', title: '修改时间', templet: function (r) {
+                        var val = r.CreateTime;
+                        if (val != null) {
+                            var date = new Date(parseInt(val.replace("/Date(", "").replace(")/", ""), 10));
+                            //月份为0-11，所以+1，月份小于10时补个0
+                            var month = date.getMonth() + 1 < 10 ? "0" + (date.getMonth() + 1) : date.getMonth() + 1;
+                            var currentDate = date.getDate() < 10 ? "0" + date.getDate() : date.getDate();
+                            return date.getFullYear() + "-" + month + "-" + currentDate;
+                        }
+                        return "";
+                    }
+                }
+                , { fixed: 'right', align: 'center', toolbar: '#bar' }
+            ]]
+            , page: true //开启分页
+        });
+
+        table.on('toolbar(test)', function (obj) {
+            var checkStatus = table.checkStatus(obj.config.id);
+            switch (obj.event) {
+                case 'add':
+                    layer.open({
+                        type: 2
+                        , title: "添加景点"
+                        , content: "/SceneryInfo/Add"
+                        , area: ['600px', '400px']
+                        , but: ['保存', '取消']
+                        , yes: function (index, layero) {
+                            var body = layer.getChildFrame('body', index);
+                            var iframeWin = window[layero.find('iframe')[0]['name']]; //得到iframe页的窗口对象
+                            iframeWin.save();
+                            break;
+                        }
+                        , btn2: function (index, layero) {
+                            //按钮【取消】的回调
+
+                            //return false 开启该代码可禁止点击该按钮关闭
+                        }
+                        , cancel: function () {
+                            //右上角关闭回调
+
+                            //return false 开启该代码可禁止点击该按钮关闭
+                        }
+                    });
+                    break;
+            }
+            });
+});
+
+</script>

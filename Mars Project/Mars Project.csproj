@@ -132,6 +132,7 @@
     <Compile Include="Content\ueditor\net\App_Code\UploadHandler.cs" />
     <Compile Include="Controllers\BackstageController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\SceneryInfoController.cs" />
     <Compile Include="Controllers\TrainInfoController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -671,6 +672,9 @@
     <Content Include="Views\TrainInfo\Index.cshtml" />
     <Content Include="Views\TrainInfo\_ViewStart.cshtml" />
     <Content Include="Views\TrainInfo\AddInfo.cshtml" />
+    <Content Include="Views\SceneryInfo\Index.cshtml" />
+    <Content Include="Views\SceneryInfo\_ViewStart.cshtml" />
+    <Content Include="Views\SceneryInfo\Add.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
