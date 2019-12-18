@@ -25,6 +25,13 @@ namespace Mars_Project
             bundles.Add(new StyleBundle("~/Content/css").Include(
                       "~/Content/bootstrap.css",
                       "~/Content/site.css"));
+
+
+            bundles.Add(new ScriptBundle("~/Script/layui").Include(
+                   "~/layui/layui.js"));
+
+            bundles.Add(new StyleBundle("~/Style/layui").Include(
+                      "~/layui/css/layui.css"));
         }
     }
 }

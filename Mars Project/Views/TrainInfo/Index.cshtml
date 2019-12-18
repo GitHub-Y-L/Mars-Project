@@ -19,6 +19,8 @@
 <script>
     layui.use('table', function () {
         var table = layui.table;
+        var $ = layui.jquery ;
+
 
         tableIns = table.render({
             elem: '#test'
@@ -31,9 +33,34 @@
             , cols: [[
                 { type: 'checkbox', fixed: 'left' }
                 , { field: 'Id', title: 'ID', width: 80, fixed: 'left', unresize: true, sort: true }
-                , { field: 'Value', title: '描述', width: 120, edit: 'text' }
-                , { field: 'TopBanner', title: 'Banner图', width: 120 }
-                , { field: 'UEValue', title: '文本内容' }
+                , { field: 'Title', title: '标题', width: 120 }
+                , { field: 'Value', title: '描述', width: 120 }
+                , { field: 'TopBanner', title: 'Banner图', minWidth: 120 }
+                , {
+                    field: 'CreateTime', title: '创建时间', width: 120, templet: function(r) {
+                        let val = r.CreateTime;
+                        if (val != null) {
+                            let date = new Date(parseInt(val.replace("/Date(", "").replace(")/", ""), 10));
+                            //月份为0-11，所以+1，月份小于10时补个0
+                            let month = date.getMonth() + 1 < 10 ? "0" + (date.getMonth() + 1) : date.getMonth() + 1;
+                            let currentDate = date.getDate() < 10 ? "0" + date.getDate() : date.getDate();
+                            return date.getFullYear() + "-" + month + "-" + currentDate;
+                        }
+                        return "";
+                    }
+                }
+                , {
+                    field: 'ModifyTime', title: '修改时间', width: 120, templet: function (r) {
+                        let val = r.ModifyTime;
+                        if (val != null) {
+                            let date = new Date(parseInt(val.replace("/Date(", "").replace(")/", ""), 10));
+                            let month = date.getMonth() + 1 < 10 ? "0" + (date.getMonth() + 1) : date.getMonth() + 1;
+                            let currentDate = date.getDate() < 10 ? "0" + date.getDate() : date.getDate();
+                            return date.getFullYear() + "-" + month + "-" + currentDate;
+                        }
+                        return "";
+                    }
+                }
                 , { fixed: 'right', title: '操作', toolbar: '#barDemo', width: 150 }
             ]]
             , page: true
@@ -56,7 +83,7 @@
                 layer.confirm('真的删除行么', function (index) {
                     obj.del();
                     layer.close(index);
-                    request("/Home/DoDelStuInfo", { Id: data.Id }, function (data) {
+                    request("/TrainInfo/DoDeleInfo", { id: data.Id }, function (data) {
                         if (data.code > 0) {
                             layer.msg('删除成功');
                             tableIns.reload();
@@ -73,9 +100,9 @@
         function addDialog(data) {
             layer.open({
                 type: 2
-                , id: 'stuinfo'
+                , id: 'info'
                 , title: '添加数据'
-                , area: ['500px', '400px']
+                , area: ['1100px', '700px']
                 , shade: 0
                 , content: "/TrainInfo/AddInfo"
                 , btn: ['添加', '关闭']
@@ -93,11 +120,11 @@
         function editDialog(data) {
             layer.open({
                 type: 2
-                , id: 'stuinfo'
+                , id: 'info'
                 , title: '修改数据'
-                , area: ['500px', '400px']
+                , area: ['1100px', '700px']
                 , shade: 0
-                , content: "/Home/ModeifyStuInfo/" + data.Id
+                , content: "/TrainInfo/ModifyInfo/" + data.Id
                 , btn: ['修改', '关闭']
                 , yes: function (index, layero) {
                     let body = layer.getChildFrame('body', index);
@@ -110,23 +137,29 @@
             });
 
         }
+
+        function request(url, requestData, successCallBack) {
+            console.log(requestData);
+            $.ajax({
+                type: 'post',
+                url: url,
+                dataType: 'json',
+                data: requestData,
+                success: function (data) {
+                    console.log("请求成功");
+                    if (successCallBack != null) successCallBack(data);
+                },
+                error: function (xhr, textStatus) {
+                    console.log(xhr);
+                }
+            });
+        }
     });
 
-    function request(url, requestData, successCallBack) {
-        console.log(requestData);
-        $.ajax({
-            type: 'post',
-            url: url,
-            dataType: 'json',
-            data: requestData,
-            success: function (data) {
-                console.log("请求成功");
-                if (successCallBack != null) successCallBack(data);
-            },
-            error: function (xhr, textStatus) {
-                console.log(xhr);
-            }
-        });
-    }
+
+
+
+   
+
 
 </script>

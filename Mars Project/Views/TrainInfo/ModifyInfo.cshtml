@@ -1,9 +1,10 @@
 ﻿@Styles.Render("~/Style/layui")
 @Scripts.Render("~/Script/layui")
 
+@model Mars_Project.Models.TrainInfo
 <style>
-    .DialogContent{
-        margin:0px 24px 0px 24px;
+    .DialogContent {
+        margin: 0px 24px 0px 24px;
     }
 </style>
 
@@ -13,32 +14,35 @@
     <script src="~/Content/ueditor/lang/zh-cn/zh-cn.js"></script>
 
     <form class="layui-form" action="" style="margin-top:20px" id="form1">
+        <input name="Id" type="hidden" value="@Model.Id">
+
         <div class="layui-form-item">
             <label class="layui-form-label">标题</label>
             <div class="layui-input-block">
-                <input type="text" name="Title" required lay-verify="required" autocomplete="off" class="layui-input">
+                <input type="text" name="Title" required lay-verify="required" autocomplete="off" class="layui-input" value="@Model.Title">
             </div>
         </div>
         <div class="layui-form-item">
             <label class="layui-form-label">描述</label>
             <div class="layui-input-block">
-                <input type="text" name="Value" required lay-verify="required" autocomplete="off" class="layui-input">
+                <input type="text" name="Value" required lay-verify="required" autocomplete="off" class="layui-input" value="@Model.Value">
             </div>
             <div class="layui-form-mid layui-word-aux"> </div>
         </div>
 
-        <textarea id="UEValue" name="UEValue"></textarea>
+        <textarea id="UEValue" name="UEValue">@Model.UEValue</textarea>
         <button id="SubmitBtn" style="display:none" class="layui-btn" lay-submit lay-filter="formDemo">提交</button>
     </form>
 
     <script type="text/javascript">
         var editor = new baidu.editor.ui.Editor({
-            initialContent: '欢迎使用ueditor',//初始化编辑器内容
+            UEDITOR_HOME_URL: '/Content/ueditor/',//配置编辑器路径
+            iframeCssUrl: '/Content/ueditor/themes/iframe.css',//样式路径
             autoHeightEnabled: true,//高度自动增长
             minFrameHeight: 700,//最小高度
             initialFrameHeight: 300
         });
-        editor.render('UEValue');
+        editor.render('UEValue');   
     </script>
 
 </div>
@@ -61,13 +65,13 @@
         //监听提交
         form.on('submit(formDemo)', function (data) {
             $.ajax({
-                url: '/TrainInfo/DoAddInfo' //提交的地址
-                , type: 'post' //提交的方式
+                url: '/TrainInfo/DoModifyInfo'
+                , type: 'post'
                 , data: $("#form1").serialize() //提交的数据
                 , dataType: 'json' // 返回值类型
-                , success: function (res) { //请求成功时执行
+                , success: function (res) {
                     if (res.code > 0) {
-                        layer.alert('添加成功！', function (index) {
+                        layer.alert('修改成功！', function (index) {
                             layer.close(index);
                             var index = parent.layer.getFrameIndex(window.name); //先得到当前iframe层的索引
                             parent.layer.close(index); //再执行关闭
