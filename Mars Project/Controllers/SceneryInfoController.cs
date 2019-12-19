@@ -4,6 +4,8 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using Mars_Project.Models;
+using System.Data;
+using System.IO;
 
 namespace Mars_Project.Controllers
 {
@@ -34,7 +36,36 @@ namespace Mars_Project.Controllers
             return PartialView();
         }
 
-        public ActionResult DoAdd() {
+        public ActionResult DoAdd(SceneryInfo scenery, HttpPostedFileBase file) {
+            if (file == null)
+            {
+                return Json(new { result = "false", code = 400, msg = "文件不存在" }, "text/html");
+            }
+
+            //用于同名图片处理，设置物理路径
+            string fileName = "~/UploadFiles/" + DateTime.Now.ToString("yyyyMMddHHssmm") + Path.GetFileName(file.FileName);
+            var physicsFileName = Server.MapPath(fileName);
+            try
+            {
+                //保存图片到对应目录
+                file.SaveAs(physicsFileName);
+                SceneryInfo ad = Session["scenery"] as SceneryInfo;
+
+                using (var db = new MPEntities())
+                {
+                    db.SceneryInfoes.Add(scenery);
+                    int i = db.SaveChanges();
+                    var res = new { code = i };
+                }
+                return Json(new { result = "true", msg = "上传成功", imgUrl = fileName });
+            }
+            catch (Exception ex)
+            {
+                return Json(new { result = "false", code = 500, msg = "保存失败" }, "text/html");
+            }
+        }
+
+        public ActionResult Upload() {
             return View();
         }
     }

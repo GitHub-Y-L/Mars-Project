@@ -6,14 +6,14 @@
 <h2>景点管理</h2>
 
 <table class="layui-hide" id="test" lay-filter="test"></table>
-<script type="text/html" id="toolbar">
+<script type="text/html" id="toolbarDemo">
     <div class="layui-btn-container">
-        <button class="layui-btn layui-btn-sm" lay-even="add">添加</button>
+        <button class="layui-btn layui-btn-sm" lay-event="add">添加</button>
     </div>
 </script>
 <script type="text/html" id="bar">
-    <a class="layui-btn layui-btn-xs" lay-even="update">修改</a>
-    <a class="layui-btn layui-btn-danger layui-btn-xs" lay-even="delete">删除</a>
+    <a class="layui-btn layui-btn-xs" lay-event="update">修改</a>
+    <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="delete">删除</a>
 </script>
 
 <script>
@@ -23,13 +23,15 @@
 
         table.render({
             elem: '#test'
+            , method: 'post'
+            , toolbar: '#toolbarDemo'
             , url: '/SceneryInfo/Select' //数据接口
+            , page: true //开启分页
             , cols: [[ //表头
                 { field: 'Id', title: 'ID', sort: true, fixed: 'left' }
                 , { field: 'Title', title: '景点标题' }
                 , { field: 'Value', title: '描述内容' }
                 , { field: 'TopBanner', title: '图片' }
-                , { field: 'UEValue', title: '富文本' }
                 , {
                     field: 'CreateTime', title: '创建时间', templet: function (r) {
                         var val = r.CreateTime;
@@ -58,7 +60,6 @@
                 }
                 , { fixed: 'right', align: 'center', toolbar: '#bar' }
             ]]
-            , page: true //开启分页
         });
 
         table.on('toolbar(test)', function (obj) {
@@ -68,14 +69,14 @@
                     layer.open({
                         type: 2
                         , title: "添加景点"
-                        , content: "/SceneryInfo/Add"
-                        , area: ['600px', '400px']
-                        , but: ['保存', '取消']
+                        , content: '/SceneryInfo/Add'
+                        , area: ['1024px', '900px']
+                        , btn: ['保存', '取消']
                         , yes: function (index, layero) {
                             var body = layer.getChildFrame('body', index);
-                            var iframeWin = window[layero.find('iframe')[0]['name']]; //得到iframe页的窗口对象
+                            var iframeWin = window[layero.find('iframe')[0]['name']]; //得到iframe页的窗口对象，
+                            //执行iframe页的方法：
                             iframeWin.save();
-                            break;
                         }
                         , btn2: function (index, layero) {
                             //按钮【取消】的回调
@@ -89,8 +90,8 @@
                         }
                     });
                     break;
-            }
-            });
-});
+            };
+        });
+    });
 
 </script>
