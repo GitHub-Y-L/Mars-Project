@@ -132,6 +132,7 @@
     <Compile Include="Content\ueditor\net\App_Code\UploadHandler.cs" />
     <Compile Include="Controllers\BackstageController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\LoginController.cs" />
     <Compile Include="Controllers\SceneryInfoController.cs" />
     <Compile Include="Controllers\TrainInfoController.cs" />
     <Compile Include="Global.asax.cs">
@@ -606,6 +607,9 @@
     <Content Include="layui\lay\modules\tree.js" />
     <Content Include="layui\lay\modules\upload.js" />
     <Content Include="layui\lay\modules\util.js" />
+    <Content Include="Login\jquery.min.js" />
+    <Content Include="Login\style.css" />
+    <Content Include="Login\vector.js" />
     <Content Include="Models\Model1.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>Model1.edmx</DependentUpon>
@@ -678,6 +682,7 @@
     <Content Include="Views\SceneryInfo\_ViewStart.cshtml" />
     <Content Include="Views\SceneryInfo\Add.cshtml" />
     <Content Include="Views\Home\TrainInfo.cshtml" />
+    <Content Include="Views\Login\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
