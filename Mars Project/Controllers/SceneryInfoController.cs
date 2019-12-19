@@ -31,11 +31,14 @@ namespace Mars_Project.Controllers
             var res = new { code = 0, msg = "", count = count, data = list };
             return Json(res);
         }
+
+
         public ActionResult Add() {
 
             return PartialView();
         }
 
+        [ValidateInput(false)]
         public ActionResult DoAdd(SceneryInfo scenery, HttpPostedFileBase file) {
             if (file == null)
             {
