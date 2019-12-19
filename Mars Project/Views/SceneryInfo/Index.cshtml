@@ -33,8 +33,12 @@
                 , { field: 'Value', title: '描述内容' }
                 , {
                     field: 'TopBanner', title: '图片', templet: function (r) {
-                        var img = r.TopBanner;
-                        return '<img src="' + img + '" />';
+                        if (r.TopBanner == null) {
+                            return "无";
+                        } else {
+                            var img = r.TopBanner;
+                            return '<img src="' + img + '" />';
+                        }
                     }
                 }
                 , {
@@ -97,6 +101,8 @@
                     break;
             };
         });
+
+
     });
 
 </script>
