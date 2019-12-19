@@ -170,6 +170,7 @@
     <Content Include="Content\HomeAssets\css\bootstrap-theme.css" />
     <Content Include="Content\HomeAssets\css\bootstrap.min.css" />
     <Content Include="Content\HomeAssets\css\camera.css" />
+    <Content Include="Content\HomeAssets\css\clean-blog.min.css" />
     <Content Include="Content\HomeAssets\css\font-awesome.min.css" />
     <Content Include="Content\HomeAssets\css\isotope.css" />
     <Content Include="Content\HomeAssets\css\style.css" />
