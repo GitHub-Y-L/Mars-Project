@@ -53,6 +53,8 @@ namespace Mars_Project.Controllers
 
                 using (var db = new MPEntities())
                 {
+                    scenery.TopBanner = fileName.Replace("~", "");
+                    scenery.CreateTime = DateTime.Now;
                     db.SceneryInfoes.Add(scenery);
                     int i = db.SaveChanges();
                     var res = new { code = i };

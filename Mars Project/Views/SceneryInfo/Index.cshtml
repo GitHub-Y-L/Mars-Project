@@ -31,7 +31,12 @@
                 { field: 'Id', title: 'ID', sort: true, fixed: 'left' }
                 , { field: 'Title', title: '景点标题' }
                 , { field: 'Value', title: '描述内容' }
-                , { field: 'TopBanner', title: '图片' }
+                , {
+                    field: 'TopBanner', title: '图片', templet: function (r) {
+                        var img = r.TopBanner;
+                        return '<img src="' + img + '" />';
+                    }
+                }
                 , {
                     field: 'CreateTime', title: '创建时间', templet: function (r) {
                         var val = r.CreateTime;
@@ -47,7 +52,7 @@
                 }
                 , {
                     field: 'ModifyTime', title: '修改时间', templet: function (r) {
-                        var val = r.CreateTime;
+                        var val = r.ModifyTime;
                         if (val != null) {
                             var date = new Date(parseInt(val.replace("/Date(", "").replace(")/", ""), 10));
                             //月份为0-11，所以+1，月份小于10时补个0
