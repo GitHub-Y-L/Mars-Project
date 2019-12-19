@@ -1,6 +1,16 @@
 ﻿@{
     ViewBag.Title = "Index";
+    
 }
+
+<style>
+    img {
+        width: auto;
+        height: auto;
+        max-width: 100%;
+        max-height: 100%;
+    }
+</style>
 
 <table class="layui-hide" id="test" lay-filter="test"></table>
 
@@ -35,7 +45,12 @@
                 , { field: 'Id', title: 'ID', width: 80, fixed: 'left', unresize: true, sort: true }
                 , { field: 'Title', title: '标题', width: 120 }
                 , { field: 'Value', title: '描述', width: 120 }
-                , { field: 'TopBanner', title: 'Banner图', minWidth: 120 }
+                , {
+                    field: 'TopBanner', title: 'Banner图', minWidth: 120, templet: function (r) {
+                        var img = r.TopBanner;
+                        return '<img src="' + img + '" />';
+                    }
+                }
                 , {
                     field: 'CreateTime', title: '创建时间', width: 120, templet: function(r) {
                         let val = r.CreateTime;

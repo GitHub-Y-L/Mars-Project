@@ -1,6 +1,8 @@
 ﻿using Mars_Project.Models;
 using System;
 using System.Collections.Generic;
+using System.Data.Entity;
+using System.IO;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -34,6 +36,7 @@ namespace Mars_Project.Controllers
             return Json(msg);
         }
 
+        #region 新增
 
         public ActionResult AddInfo() {
             return PartialView();
@@ -41,8 +44,24 @@ namespace Mars_Project.Controllers
 
         [HttpPost]
         [ValidateInput(false)]
-        public ActionResult DoAddInfo(TrainInfo trainInfo) {
+        public ActionResult DoAddInfo(TrainInfo trainInfo, HttpPostedFileBase file) {
             var db = new MPEntities();
+
+            if (file != null) {
+                //用于同名图片处理，设置物理路径
+                string fileName = "~/UploadFiles/" + DateTime.Now.ToString("yyyyMMddHHssmm") + Path.GetFileName(file.FileName);
+                var physicsFileName = Server.MapPath(fileName);
+                try {
+                    //保存图片到对应目录
+                    file.SaveAs(physicsFileName);
+                    trainInfo.TopBanner = fileName.Replace("~", "");
+                } catch (Exception e) {
+                    return Json(new { result = "false", code = 500, msg = "保存失败" }, "text/html");
+                }
+            } else {
+                return Json(new { result = "false", code = 500, msg = "文件不存在" }, "text/html");
+            }
+
             trainInfo.CreateTime = DateTime.Now;
             db.TrainInfoes.Add(trainInfo);
             var codeData = db.SaveChanges();
@@ -52,6 +71,9 @@ namespace Mars_Project.Controllers
             return Json(msg);
         }
 
+        #endregion
+
+        #region 删除
 
         [HttpPost]
         public ActionResult DoDeleInfo(int id) {
@@ -66,25 +88,47 @@ namespace Mars_Project.Controllers
             return Json(res);
         }
 
+        #endregion
+
+        #region 修改
 
         public ActionResult ModifyInfo(int id) {
             var db = new MPEntities();
             var trainInfo = db.TrainInfoes.Where(s => s.Id == id).FirstOrDefault();
             return PartialView(trainInfo);
         }
-
+              
         [HttpPost]
         [ValidateInput(false)]
-        public ActionResult DoModifyInfo(TrainInfo trainInfo) {
+        public ActionResult DoModifyInfo(TrainInfo trainInfo, HttpPostedFileBase file) {
             var db = new MPEntities();
-            TrainInfo temp = db.TrainInfoes.Attach(trainInfo);
-            temp.ModifyTime = DateTime.Now;
+            TrainInfo tempOriginal = db.TrainInfoes.Where(s => s.Id == trainInfo.Id).FirstOrDefault();
+
+            if (file != null) {
+                //用于同名图片处理，设置物理路径
+                string fileName = "~/UploadFiles/" + DateTime.Now.ToString("yyyyMMddHHssmm") + Path.GetFileName(file.FileName);
+                var physicsFileName = Server.MapPath(fileName);
+                try {
+                    //保存图片到对应目录
+                    file.SaveAs(physicsFileName);
+                    tempOriginal.TopBanner = fileName.Replace("~", "");
+                } catch (Exception e) {
+                    return Json(new { result = "false", code = 500, msg = "保存失败" }, "text/html");
+                }
+            }
+
+            tempOriginal.Title = trainInfo.Title;
+            tempOriginal.Value = trainInfo.Value;
+            tempOriginal.UEValue = trainInfo.UEValue;
+            tempOriginal.IsDele = trainInfo.IsDele;
+            tempOriginal.ModifyTime = DateTime.Now;
             //修改对象在内存中的状态
-            db.Entry<TrainInfo>(temp).State = System.Data.Entity.EntityState.Modified;
+            db.Entry<TrainInfo>(tempOriginal).State = EntityState.Modified;
             int i = db.SaveChanges();
             var res = new { code = i };
             return Json(res);
         }
 
+        #endregion
     }
 }

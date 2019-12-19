@@ -30,6 +30,21 @@
             <div class="layui-form-mid layui-word-aux"> </div>
         </div>
 
+        <div class="layui-form-item">
+            <label class="layui-form-label">图片</label>
+            @* 验证图片必须选择 lay-verify="required" lay-reqtext="必须选择图片" 没有选择图片时的提示信息*@
+            <input type="hidden" id="pic" required lay-verify="required" value="@Model.TopBanner" lay-reqtext="必须选择图片" />
+            <div class="layui-input-inline">
+                <div class="layui-upload">
+                    <button type="button" class="layui-btn" id="test1">上传图片</button>
+                    <div class="layui-upload-list">
+                        <img class="layui-upload-img" id="imgShow" src="@Model.TopBanner" style="height:150px;width:150px">
+                        <p id="demoText"></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
         <textarea id="UEValue" name="UEValue">@Model.UEValue</textarea>
         <button id="SubmitBtn" style="display:none" class="layui-btn" lay-submit lay-filter="formDemo">提交</button>
     </form>
@@ -38,7 +53,7 @@
         var editor = new baidu.editor.ui.Editor({
             UEDITOR_HOME_URL: '/Content/ueditor/',//配置编辑器路径
             iframeCssUrl: '/Content/ueditor/themes/iframe.css',//样式路径
-            autoHeightEnabled: true,//高度自动增长
+            autoHeightEnabled: false,//高度自动增长
             minFrameHeight: 700,//最小高度
             initialFrameHeight: 300
         });
@@ -58,17 +73,20 @@
     }
 
     //初始化表单使用
-    layui.use(['form', 'jquery'], function () {
+    layui.use(['form', 'upload', 'jquery'], function () {
         var form = layui.form
-            , $ = layui.jquery;
+            , $ = layui.jquery
+            , upload = layui.upload;
 
         //监听提交
         form.on('submit(formDemo)', function (data) {
             $.ajax({
                 url: '/TrainInfo/DoModifyInfo'
                 , type: 'post'
-                , data: $("#form1").serialize() //提交的数据
+                , data: new FormData($("#form1")[0]) //提交的数据
                 , dataType: 'json' // 返回值类型
+                , contentType: false  //jax 中 contentType 设置为 false 是为了避免 JQuery 对其操作，从而失去分界符，而使服务器不能正常解析文件
+                , processData: false  //当设置为true的时候,jquery ajax 提交的时候不会序列化 data，而是直接使用data
                 , success: function (res) {
                     if (res.code > 0) {
                         layer.alert('修改成功！', function (index) {
@@ -82,6 +100,20 @@
                 }
             });
             return false;
+        });
+
+        //普通图片上传
+        var uploadInst = upload.render({
+            elem: '#test1'
+            , auto: false
+            , choose: function (obj) {
+
+                //预读本地文件示例，不支持ie8
+                obj.preview(function (index, file, result) {
+                    $('#imgShow').attr('src', result); //图片链接（base64）
+                    $("#pic").val("已选择图片");
+                });
+            }
         });
 
     });
