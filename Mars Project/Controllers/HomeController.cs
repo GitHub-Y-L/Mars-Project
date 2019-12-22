@@ -22,6 +22,11 @@ namespace Mars_Project.Controllers
             return View();
         }
 
+        public ActionResult SceneryInfo()
+        {
+            return View();
+        }
+
         public ActionResult TrainInfoOne(int id) {
             var db = new MPEntities();
             TrainInfo info = db.TrainInfoes
