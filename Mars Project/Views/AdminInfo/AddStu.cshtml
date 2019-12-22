@@ -1,0 +1,96 @@
+﻿<link href="~/layui/css/layui.css" rel="stylesheet" />
+<script src="~/layui/layui.js"></script>
+<form class="layui-form" action="" style="margin-top:20px" id="form1">
+    <div class="layui-form-item">
+        <label class="layui-form-label">姓名</label>
+        <div class="layui-input-inline">
+            <input type="text" name="UserName" required lay-verify="required" placeholder="请输入姓名" autocomplete="off" class="layui-input">
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">密码</label>
+        <div class="layui-input-inline">
+            <input type="text" name="Password" required lay-verify="required" placeholder="请输入密码" autocomplete="off" class="layui-input">
+        </div>
+    </div>
+
+
+    <div class="layui-form-item" style=" display:none">
+        <div class="layui-input-block">
+            <button class="layui-btn" lay-submit lay-filter="formDemo" id="btnSave">立即提交</button>
+            <button type="reset" class="layui-btn layui-btn-primary">重置</button>
+        </div>
+    </div>
+</form>
+
+<script>
+    //Demo
+    //父页面调用
+    function save() {
+        layui.use('jquery', function () {
+            var $ = layui.jquery;
+
+            $("#btnSave").click();
+
+        });
+    }
+
+    //初始化表单使用
+    layui.use(['form', 'jquery'], function () {
+        var form = layui.form
+        , $ = layui.jquery;
+
+
+        //监听提交
+        form.on('submit(formDemo)', function (data) {
+            $.ajax({
+                url: '/AdminInfo/DoAddStu' //提交的地址
+                , type: 'post' //提交的方式
+                , data: $("#form1").serialize() //提交的数据
+                , dataType: 'json' // 返回值类型
+                , success: function (res) { //请求成功时执行
+                    if (res.code > 0) {
+                        layer.alert('添加成功！', function (index) {
+                            layer.close(index);
+
+                            //关闭父级页面的Iframe
+                            var index = parent.layer.getFrameIndex(window.name); //先得到当前iframe层的索引
+                            parent.layer.close(index); //再执行关闭
+                            //父级页面  表格没有刷新
+                            parent.mytable.reload();
+                        });
+
+                    }
+                }
+            });
+            return false;
+        });
+
+        ///自定义的表单验证规则
+        form.verify({
+            username: function (value, item) { //value：表单的值、item：表单的DOM对象
+                if (!new RegExp("^[a-zA-Z0-9_\u4e00-\u9fa5\\s·]+$").test(value)) {
+                    return '用户名不能有特殊字符';
+                }
+                if (/(^\_)|(\__)|(\_+$)/.test(value)) {
+                    return '用户名首尾不能出现下划线\'_\'';
+                }
+                if (/^\d+\d+\d$/.test(value)) {
+                    return '用户名不能全为数字';
+                }
+            }
+
+            //我们既支持上述函数式的方式，也支持下述数组的形式
+            //数组的两个值分别代表：[正则匹配、匹配不符时的提示文字]
+            , pass: [
+                  /^[\S]{6,12}$/
+             , '密码必须6到12位，且不能出现空格'
+            ]
+        });
+
+
+
+    });
+
+
+</script>

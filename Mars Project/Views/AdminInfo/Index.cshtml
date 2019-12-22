@@ -1,0 +1,141 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+}
+<h2>后台用户表</h2>
+<table class="layui-hide" id="test" lay-filter="test"></table>
+
+<script type="text/html" id="toolbarDemo">
+    <div class="layui-btn-container">
+        <button class="layui-btn layui-btn-sm" lay-event="Add">新增</button>
+    </div>
+</script>
+
+@*数据操作按钮*@
+<script type="text/html" id="barDemo">
+    <a class="layui-btn layui-btn-xs" lay-event="edit">编辑</a>
+    <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</a>
+</script>
+
+
+<script>
+    var mytable = null;
+    layui.use(['table','jquery'], function () {
+        var table = layui.table;
+        var $ = layui.jquery;
+
+       mytable=table.render({
+            elem: '#test'
+          , url: '/AdminInfo/GetPageData' //表格中显示的数据【服务端请求地址】
+          , method: 'post'  //请求数据的方式
+          , toolbar: '#toolbarDemo' //开启头部工具栏，并为其绑定左侧模板
+          , defaultToolbar: null
+          , title: '用户数据表'
+          , cols: [[
+            { type: 'checkbox', fixed: 'left' }
+            , { field: 'Id', title: 'ID', width: 80, fixed: 'left', unresize: true }
+            , { field: 'UserName', title: '用户名', width: 120 }
+
+            , { field: 'Password', title: '密码', minWidth: 100 }
+
+            , { fixed: 'right', title: '操作', toolbar: '#barDemo', width: 150 }//数据操作按钮
+          ]]
+          , page: true //显示分页
+        });
+
+        //头工具栏事件
+        table.on('toolbar(test)', function (obj) {
+            var checkStatus = table.checkStatus(obj.config.id);
+            switch (obj.event) {
+                case 'Add':
+                    //弹出添加层：
+                    layer.open({
+                        type: 2  // 弹出框类型：2-Iframe
+                        , title: '添加用户信息'
+                        , content: '/AdminInfo/AddStu'
+                        , area: ['500px','400px']
+                        , btn: ['保存', '取消', ]
+                        , yes: function (index, layero) {
+                            //按钮【保存】的回调
+                            //调用 弹出层中的方法
+                            var body = layer.getChildFrame('body', index);
+                            var iframeWin = window[layero.find('iframe')[0]['name']]; //得到iframe页的窗口对象，
+                            //执行iframe页的方法：
+                            iframeWin.save();
+
+                        }
+                        , btn2: function (index, layero) {
+                            //按钮【取消】的回调
+
+                            //return false 开启该代码可禁止点击该按钮关闭
+                        }
+                         , cancel: function () {
+                        //右上角关闭回调
+
+                        //return false 开启该代码可禁止点击该按钮关闭
+                        }
+
+                    });
+                    break;
+
+            };
+        });
+
+        //监听行工具事件
+        table.on('tool(test)', function (obj) {
+            var data = obj.data;
+            if (obj.event === 'del') {
+                layer.confirm('真的删除行么', function (index) {
+
+                    layer.close(index);
+                    $.ajax({
+                        url: '/AdminInfo/DoDele'//异步提交地址
+                        , type: 'post'//提交方式
+                        , dataType: 'json'//返回值得数据格式
+                        , data: {id:data.Id}//提交的数据
+                        , success: function (res) {
+                            //请求成功后，服务端返回的结果
+                            if (res.code > 0) {
+                                layer.alert('删除成功');
+                                obj.del();
+                                mytable.reload();
+                            }
+                            else {
+                                layer.alert('删除失败');
+                            }
+                        }
+                    });
+                });
+            } else if (obj.event === 'edit') {
+                //弹出添加层：
+                layer.open({
+                    type: 2  // 弹出框类型：2-Iframe
+                    , title: '修改用户信息'
+                    , content: '/AdminInfo/ModeifyStu/'+data.Id
+                    , area: ['500px', '400px']
+                    , btn: ['保存', '取消', ]
+                    , yes: function (index, layero) {
+                        //按钮【保存】的回调
+                        //调用 弹出层中的方法
+                        var body = layer.getChildFrame('body', index);
+                        var iframeWin = window[layero.find('iframe')[0]['name']]; //得到iframe页的窗口对象，
+                        //执行iframe页的方法：
+                        iframeWin.save();
+
+                    }
+                    , btn2: function (index, layero) {
+                        //按钮【取消】的回调
+
+                        //return false 开启该代码可禁止点击该按钮关闭
+                    }
+                     , cancel: function () {
+                         //右上角关闭回调
+
+                         //return false 开启该代码可禁止点击该按钮关闭
+                     }
+
+                });
+            }
+        });
+    });
+</script>
