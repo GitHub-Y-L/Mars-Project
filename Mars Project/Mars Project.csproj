@@ -227,6 +227,15 @@
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\HomeAssets\portfolio\img1.jpg" />
+    <Content Include="Content\HomeAssets\portfolio\img2.jpg" />
+    <Content Include="Content\HomeAssets\portfolio\img3.jpg" />
+    <Content Include="Content\HomeAssets\portfolio\img4.jpg" />
+    <Content Include="Content\HomeAssets\portfolio\img5.jpg" />
+    <Content Include="Content\HomeAssets\portfolio\img6.jpg" />
+    <Content Include="Content\HomeAssets\portfolio\img7.jpg" />
+    <Content Include="Content\HomeAssets\portfolio\img8.jpg" />
+    <Content Include="Content\HomeAssets\portfolio\img9.jpg" />
     <Content Include="Content\ueditor\dialogs\anchor\anchor.html" />
     <Content Include="Content\ueditor\dialogs\attachment\attachment.css" />
     <Content Include="Content\ueditor\dialogs\attachment\attachment.html" />
@@ -678,6 +687,8 @@
     <Content Include="Views\SceneryInfo\_ViewStart.cshtml" />
     <Content Include="Views\SceneryInfo\Add.cshtml" />
     <Content Include="Views\Home\TrainInfo.cshtml" />
+    <Content Include="Views\SceneryInfo\Update.cshtml" />
+    <Content Include="Views\Home\SceneryInfo.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

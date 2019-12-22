@@ -20,5 +20,10 @@ namespace Mars_Project.Controllers
         public ActionResult TrainInfo() {
             return View();
         }
+
+        public ActionResult SceneryInfo()
+        {
+            return View();
+        }
     }
 }

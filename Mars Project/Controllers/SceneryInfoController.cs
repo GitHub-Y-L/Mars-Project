@@ -52,7 +52,6 @@ namespace Mars_Project.Controllers
             {
                 //保存图片到对应目录
                 file.SaveAs(physicsFileName);
-                SceneryInfo ad = Session["scenery"] as SceneryInfo;
 
                 using (var db = new MPEntities())
                 {
@@ -70,8 +69,57 @@ namespace Mars_Project.Controllers
             }
         }
 
-        public ActionResult Upload() {
-            return View();
+
+        public ActionResult Update(int id) {
+            var db = new MPEntities();
+            //修改对象的信息
+            var m = db.SceneryInfoes.Where(s => s.Id == id).FirstOrDefault();
+            return PartialView(m);
+        }
+
+
+        [ValidateInput(false)]
+        public ActionResult DoUpdate(SceneryInfo scenery, HttpPostedFileBase file) {
+            var db = new MPEntities();
+            var Scenery= db.SceneryInfoes.Where(s => s.Id == scenery.Id).FirstOrDefault();
+
+            //用于同名图片处理，设置物理路径
+            if (file!=null) { 
+                string fileName = "~/UploadFiles/" + DateTime.Now.ToString("yyyyMMddHHssmm") + Path.GetFileName(file.FileName);
+                var physicsFileName = Server.MapPath(fileName);
+                try
+             {
+                    //保存图片到对应目录
+                 file.SaveAs(physicsFileName);
+                 Scenery.TopBanner = fileName.Replace("~", "");
+                }catch (Exception ex)
+               {
+                    return Json(new { result = "false", code = 500, msg = "修改失败" }, "text/html");
+               }
+             }
+                Scenery.Title = scenery.Title;
+                Scenery.Value = scenery.Value;
+                Scenery.UEValue = scenery.UEValue;
+                Scenery.ModifyTime = DateTime.Now;
+                db.Entry<SceneryInfo>(Scenery).State = System.Data.Entity.EntityState.Modified;
+                int i = db.SaveChanges();
+                var res = new { code = i };
+                return Json(new { result = "true", msg = "修改成功" });
+           
+            
+        }
+
+        public ActionResult Delete(int id) {
+            var db = new MPEntities();
+            //根据传入id 查找 对象
+            SceneryInfo scenery = db.SceneryInfoes.Where(s => s.Id == id).FirstOrDefault();
+            //设置 是否删除 字段 为1，标识删除
+            scenery.IsDele = 1;
+
+            //保存到数据库中
+            int i = db.SaveChanges();
+            var res = new { code = i };
+            return Json(res);
         }
     }
 }
