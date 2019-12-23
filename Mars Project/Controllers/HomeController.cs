@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using System.Text;
 
 namespace Mars_Project.Controllers
 {
@@ -35,6 +36,13 @@ namespace Mars_Project.Controllers
 
             ViewBag.TrainInfoOne = info;
             return View();
+        }
+
+        public ActionResult SceneryInfoOne(int id) {
+            var db = new MPEntities();
+            SceneryInfo scenery = db.SceneryInfoes.Where(s => s.Id == id && s.IsDele == 0).FirstOrDefault();
+
+            return View(scenery);
         }
     }
 }

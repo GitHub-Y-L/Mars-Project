@@ -705,6 +705,7 @@
     <Content Include="Views\NavMenu\ModeifyNavMenu.cshtml" />
     <Content Include="Views\NavMenu\_ViewStart.cshtml" />
     <Content Include="Views\Home\TrainInfoOne.cshtml" />
+    <Content Include="Views\Home\SceneryInfoOne.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
