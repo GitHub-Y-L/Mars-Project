@@ -6,6 +6,7 @@
     <meta name="description" content="">
     <meta name="author" content="webThemez.com">
     <title>@ViewBag.Title</title>
+
     <link rel="favicon" href="assets/images/favicon.png">
     <link rel="stylesheet" media="screen" href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,700">
     <link href="~/Content/HomeAssets/css/bootstrap-theme.css" rel="stylesheet" />
@@ -27,13 +28,9 @@
                 </a>
             </div>
             <div class="navbar-collapse collapse">
-                <ul class="nav navbar-nav pull-right mainNav">
-                    <li><a style="font-size: 20px; color: #FFFFFF;" href="/Home/Index">主页</a></li>
-                    <li><a style="font-size: 20px; color: #FFFFFF;" href="/Home/About">简介</a></li>
-                    <li><a style="font-size: 20px; color: #FFFFFF;" href="projects.html">景点</a></li>
-                    <li><a style="font-size: 20px; color: #FFFFFF;" href="/Home/TrainInfo">旅游培训</a></li>
-                    <li><a style="font-size: 20px; color: #FFFFFF;" href="/Login/Index">后台人口</a></li>
-
+                <ul class="nav navbar-nav pull-right mainNav" id="myMainNav">
+                    @*构造主导航栏内容*@
+                    @*<li><a style="font-size: 20px; color: #FFFFFF;" href="/Home/Index">主页</a></li>*@
                 </ul>
             </div>
             <!--/.nav-collapse -->
@@ -42,7 +39,7 @@
     <!-- /.navbar -->
     <!-- Header -->
     <header style="background-color: #000000; background-size: cover; height: auto;text-align: center; color: white; font-weight: 300; position: relative; border-top: 2px solid #ae130c; border-bottom: 2px solid #ae130c; background-position-x: center;">
-        <img style="width: auto; height: auto; max-width: 100%; max-height: 100%;  text-align: center;" src="~/Content/HomeAssets/images/hx2.jpg" />
+        <img style="width: auto; height: auto; max-width: 100%; max-height: 100%;  text-align: center;" src="~/Content/HomeAssets/images/hx2.jpg" id="myTopBanner" />
     </header>
     <!-- /Header -->
 
@@ -53,6 +50,7 @@
     <footer id="footer">
         <div class="container">
             <div class="social text-center">
+                @*分享功能暂时空缺*@
                 <a href="#"><i class="fa fa-twitter"></i></a>
                 <a href="#"><i class="fa fa-facebook"></i></a>
                 <a href="#"><i class="fa fa-dribbble"></i></a>
@@ -70,10 +68,10 @@
                     <div class="col-md-6 panel">
                         <div class="panel-body">
                             <p class="simplenav">
-                                <a href="index.html">主页</a> |
-                                <a href="~/Views/Home/About.cshtml">简介</a> |
-                                <a href="projects.html">景点</a> |
-                                <a href="price.html">旅游培训</a> |
+                                <span id="myFooterNav">
+                                    @*<a href="index.html">主页</a> |*@
+                                </span>
+
                                 <a href="/Backstage/Index">后台人口</a>
                             </p>
                         </div>
@@ -84,7 +82,7 @@
         </div>
     </footer>
 
-    <!-- JavaScript libs are placed at the end of the document so the pages load faster -->
+    @*脚本*@
     <script src="~/Content/HomeAssets/js/modernizr-latest.js"></script>
     <script type='text/javascript' src='~/Content/HomeAssets/js/jquery.min.js'></script>
     <script type='text/javascript' src='~/Content/HomeAssets/js/fancybox/jquery.fancybox.pack.js'></script>
@@ -96,6 +94,33 @@
     <script src="~/Content/HomeAssets/js/custom.js"></script>
 
     <script src="~/Scripts/jquery-3.3.1.min.js"></script>
+
+    <script>
+        let limitNavMenu = 11; //Max
+        let pageNavMenu = 1;
+        $.ajax({
+            url: '/NavMenu/GetPageData'
+            , type: 'post'
+            , data: {
+                limit: limitNavMenu,
+                page: pageNavMenu
+            }
+            , dataType: 'json'
+            , success: function (res) {
+                if (res.code == 0) {
+                    for (var i = 0; i < res.data.length; i++) {
+                        $('#myMainNav').append('<li><a style="font-size: 20px; color: #FFFFFF;" href="' + res.data[i].LinkAddress + '">' + res.data[i].MenuName + '</a></li>');
+                        $('#myFooterNav').append('<a href="' + res.data[i].LinkAddress + '">' + res.data[i].MenuName + '</a> |');
+
+                        $('#myTopBanner').attr('src', res.data[i].TopBanner);
+
+                    }
+                }
+            }
+        });
+
+    </script>
+
     @RenderSection("scripts", required: false)
 
 

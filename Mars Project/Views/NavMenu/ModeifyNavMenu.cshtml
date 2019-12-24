@@ -12,6 +12,22 @@
             <input type="text" name="MenuName" value="@Model.MenuName" required lay-verify="required" placeholder="请输入菜单名" autocomplete="off" class="layui-input">
         </div>
     </div>
+
+    <div class="layui-form-item">
+        <label class="layui-form-label">图片</label>
+        @* 验证图片必须选择 lay-verify="required" lay-reqtext="必须选择图片" 没有选择图片时的提示信息*@
+        <input type="hidden" id="pic" required lay-verify="required" value="@Model.TopBanner" lay-reqtext="必须选择图片" />
+        <div class="layui-input-inline">
+            <div class="layui-upload">
+                <button type="button" class="layui-btn" id="test1">上传图片</button>
+                <div class="layui-upload-list">
+                    <img class="layui-upload-img" id="imgShow" src="@Model.TopBanner" style="height:150px;width:150px">
+                    <p id="demoText"></p>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <div class="layui-form-item">
         <label class="layui-form-label">链接地址</label>
         <div class="layui-input-inline">
@@ -33,6 +49,10 @@
             <button type="reset" class="layui-btn layui-btn-primary">重置</button>
         </div>
     </div>
+    <input type="hidden" name="CreateTime" value="@Model.CreateTime">
+    <input type="hidden" name="CreaterId" value="@Model.CreaterId">
+
+
 </form>
 
 <script>
@@ -48,18 +68,20 @@
     }
 
     //初始化表单使用
-    layui.use(['form', 'jquery'], function () {
+    layui.use(['form', 'jquery', 'upload'], function () {
         var form = layui.form
-        , $ = layui.jquery;
-
+            , $ = layui.jquery
+            , upload = layui.upload;
 
         //监听提交
         form.on('submit(formDemo)', function (data) {
             $.ajax({
                 url: '/NavMenu/DoModifyNavMenu' //提交的地址
                 , type: 'post' //提交的方式
-                , data: $("#form1").serialize() //提交的数据
+                , data: new FormData($("#form1")[0])  //提交的数据
                 , dataType: 'json' // 返回值类型
+                , contentType: false
+                , processData: false
                 , success: function (res) { //请求成功时执行
                     if (res.code > 0) {
                         layer.alert('修改成功！', function (index) {
@@ -78,26 +100,17 @@
             return false;
         });
 
-        ///自定义的表单验证规则
-        form.verify({
-            username: function (value, item) { //value：表单的值、item：表单的DOM对象
-                if (!new RegExp("^[a-zA-Z0-9_\u4e00-\u9fa5\\s·]+$").test(value)) {
-                    return '用户名不能有特殊字符';
-                }
-                if (/(^\_)|(\__)|(\_+$)/.test(value)) {
-                    return '用户名首尾不能出现下划线\'_\'';
-                }
-                if (/^\d+\d+\d$/.test(value)) {
-                    return '用户名不能全为数字';
-                }
-            }
+        var uploadInst = upload.render({
+            elem: '#test1'
+            , auto: false
+            , choose: function (obj) {
 
-            //我们既支持上述函数式的方式，也支持下述数组的形式
-            //数组的两个值分别代表：[正则匹配、匹配不符时的提示文字]
-            , pass: [
-                  /^[\S]{6,12}$/
-             , '密码必须6到12位，且不能出现空格'
-            ]
+                //预读本地文件示例，不支持ie8
+                obj.preview(function (index, file, result) {
+                    $('#imgShow').attr('src', result); //图片链接（base64）
+                    $("#pic").val("已选择图片");
+                });
+            }
         });
 
 

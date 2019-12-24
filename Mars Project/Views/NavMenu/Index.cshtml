@@ -38,7 +38,7 @@
 
              , { field: 'LinkAddress', title: '链接地址' }
              , { field: 'OrderBy', title: '顺序号', width: 100 }
-             , { field: 'CreateId', title: '创建人' }
+             , { field: 'CreaterId', title: '创建人' }
                , {
                    field: 'CreateTime', title: '创建时间', templet: function (r) {
                        var val = r.CreateTime;
@@ -54,9 +54,9 @@
                }
                    ,{ field:'ModifyerId', title:'修改人Id'}
                    ,{ field:'ModifyTime', title:'修改人时间',templet: function (r)  {
-                       var val = r.ModifyTime;
-                       if (val != null) {
-                           var date = new Date(parseInt(val.replace("/Date(", "").replace(")/", ""), 10));
+                       var val2 = r.ModifyTime;
+                       if (val2 != null) {
+                           var date = new Date(parseInt(val2.replace("/Date(", "").replace(")/", ""), 10));
                            //月份为0-11，所以+1，月份小于10时补个0
                            var month = date.getMonth() + 1 < 10 ? "0" + (date.getMonth() + 1) : date.getMonth() + 1;
                            var currentDate = date.getDate() < 10 ? "0" + date.getDate() : date.getDate();
