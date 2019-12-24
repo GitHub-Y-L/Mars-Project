@@ -134,6 +134,7 @@
     <Compile Include="Controllers\BackstageController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
+    <Compile Include="Controllers\MovieInfoController.cs" />
     <Compile Include="Controllers\NavMenuController.cs" />
     <Compile Include="Controllers\SceneryInfoController.cs" />
     <Compile Include="Controllers\TrainInfoController.cs" />
@@ -157,6 +158,9 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Model1.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="Models\MovieInfo.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\NavMenu.cs">
       <DependentUpon>Model1.tt</DependentUpon>
@@ -239,6 +243,7 @@
     <Content Include="Content\HomeAssets\portfolio\img7.jpg" />
     <Content Include="Content\HomeAssets\portfolio\img8.jpg" />
     <Content Include="Content\HomeAssets\portfolio\img9.jpg" />
+    <Content Include="Content\movie-style.css" />
     <Content Include="Content\ueditor\dialogs\anchor\anchor.html" />
     <Content Include="Content\ueditor\dialogs\attachment\attachment.css" />
     <Content Include="Content\ueditor\dialogs\attachment\attachment.html" />
@@ -706,6 +711,11 @@
     <Content Include="Views\NavMenu\_ViewStart.cshtml" />
     <Content Include="Views\Home\TrainInfoOne.cshtml" />
     <Content Include="Views\Home\SceneryInfoOne.cshtml" />
+    <Content Include="Views\Home\MovieInfo.cshtml" />
+    <Content Include="Views\MovieInfo\Index.cshtml" />
+    <Content Include="Views\MovieInfo\_ViewStart.cshtml" />
+    <Content Include="Views\MovieInfo\AddInfo.cshtml" />
+    <Content Include="Views\MovieInfo\ModifyInfo.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

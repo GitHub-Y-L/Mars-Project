@@ -4,25 +4,43 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-    <Schema Namespace="MarsProjectModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl" Alias="Self" Namespace="MarsProjectModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012">
         <EntityType Name="AdminInfo">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
-          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="UserName" Type="nvarchar" MaxLength="36" Nullable="false" />
-          <Property Name="Password" Type="nvarchar" MaxLength="24" Nullable="false" />
+          <Property Name="Id" Nullable="false" StoreGeneratedPattern="Identity" Type="int" />
+          <Property Name="UserName" Nullable="false" MaxLength="36" Type="nvarchar" />
+          <Property Name="Password" Nullable="false" MaxLength="24" Type="nvarchar" />
+        </EntityType>
+        <EntityType Name="MovieInfo">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Nullable="false" StoreGeneratedPattern="Identity" Type="int" />
+          <Property Name="Name" MaxLength="100" Type="nvarchar" />
+          <Property Name="NameEn" MaxLength="100" Type="nvarchar" />
+          <Property Name="Image" MaxLength="260" Type="nvarchar" />
+          <Property Name="Rating" Type="float" />
+          <Property Name="Cast" MaxLength="250" Type="nvarchar" />
+          <Property Name="Direction" MaxLength="250" Type="nvarchar" />
+          <Property Name="Genre" MaxLength="250" Type="nvarchar" />
+          <Property Name="Duration" MaxLength="250" Type="nvarchar" />
+          <Property Name="UEContent" MaxLength="2000" Type="nvarchar" />
+          <Property Name="IsDele" Nullable="false" Type="int" />
+          <Property Name="CreateTime" Type="datetime" />
+          <Property Name="ModifyTime" Type="datetime" />
         </EntityType>
         <EntityType Name="NavMenu">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
-          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="MenuName" Type="nvarchar" MaxLength="50" Nullable="false" />
-          <Property Name="LinkAddress" Type="nvarchar" MaxLength="250" />
-          <Property Name="TopBanner" Type="nvarchar" MaxLength="250" />
-          <Property Name="OrderBy" Type="int" Nullable="false" />
-          <Property Name="IsDele" Type="int" Nullable="false" />
+          <Property Name="Id" Nullable="false" StoreGeneratedPattern="Identity" Type="int" />
+          <Property Name="MenuName" Nullable="false" MaxLength="50" Type="nvarchar" />
+          <Property Name="LinkAddress" MaxLength="250" Type="nvarchar" />
+          <Property Name="TopBanner" MaxLength="250" Type="nvarchar" />
+          <Property Name="OrderBy" Nullable="false" Type="int" />
+          <Property Name="IsDele" Nullable="false" Type="int" />
           <Property Name="CreaterId" Type="int" />
           <Property Name="CreateTime" Type="datetime" />
           <Property Name="ModifyerId" Type="int" />
@@ -32,12 +50,12 @@
           <Key>
             <PropertyRef Name="Id" />
           </Key>
-          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="Title" Type="nvarchar" MaxLength="50" />
-          <Property Name="Value" Type="nvarchar" MaxLength="200" />
-          <Property Name="TopBanner" Type="nvarchar" MaxLength="250" />
+          <Property Name="Id" Nullable="false" StoreGeneratedPattern="Identity" Type="int" />
+          <Property Name="Title" MaxLength="50" Type="nvarchar" />
+          <Property Name="Value" MaxLength="200" Type="nvarchar" />
+          <Property Name="TopBanner" MaxLength="250" Type="nvarchar" />
           <Property Name="UEValue" Type="nvarchar(max)" />
-          <Property Name="IsDele" Type="int" Nullable="false" />
+          <Property Name="IsDele" Nullable="false" Type="int" />
           <Property Name="CreateTime" Type="datetime" />
           <Property Name="ModifyTime" Type="datetime" />
         </EntityType>
@@ -45,17 +63,18 @@
           <Key>
             <PropertyRef Name="Id" />
           </Key>
-          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="Title" Type="nvarchar" MaxLength="50" />
-          <Property Name="Value" Type="nvarchar" MaxLength="200" />
-          <Property Name="TopBanner" Type="nvarchar" MaxLength="250" />
+          <Property Name="Id" Nullable="false" StoreGeneratedPattern="Identity" Type="int" />
+          <Property Name="Title" MaxLength="50" Type="nvarchar" />
+          <Property Name="Value" MaxLength="200" Type="nvarchar" />
+          <Property Name="TopBanner" MaxLength="250" Type="nvarchar" />
           <Property Name="UEValue" Type="nvarchar(max)" />
-          <Property Name="IsDele" Type="int" Nullable="false" />
+          <Property Name="IsDele" Nullable="false" Type="int" />
           <Property Name="CreateTime" Type="datetime" />
           <Property Name="ModifyTime" Type="datetime" />
         </EntityType>
         <EntityContainer Name="MarsProjectModelStoreContainer">
           <EntitySet Name="AdminInfo" EntityType="Self.AdminInfo" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="MovieInfo" EntityType="Self.MovieInfo" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="NavMenu" EntityType="Self.NavMenu" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="SceneryInfo" EntityType="Self.SceneryInfo" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TrainInfo" EntityType="Self.TrainInfo" Schema="dbo" store:Type="Tables" />
@@ -118,7 +137,26 @@
           <EntitySet Name="NavMenus" EntityType="Self.NavMenu" />
           <EntitySet Name="SceneryInfoes" EntityType="Self.SceneryInfo" />
           <EntitySet Name="TrainInfoes" EntityType="Self.TrainInfo" />
+          <EntitySet Name="MovieInfoes" EntityType="MarsProjectModel.MovieInfo" />
         </EntityContainer>
+        <EntityType Name="MovieInfo">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="NameEn" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Image" Type="String" MaxLength="260" FixedLength="false" Unicode="true" />
+          <Property Name="Rating" Type="Double" />
+          <Property Name="Cast" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="Direction" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="Genre" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="Duration" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="UEContent" Type="String" MaxLength="2000" FixedLength="false" Unicode="true" />
+          <Property Name="IsDele" Type="Int32" Nullable="false" />
+          <Property Name="CreateTime" Type="DateTime" Precision="3" />
+          <Property Name="ModifyTime" Type="DateTime" Precision="3" />
+        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -175,6 +213,25 @@
                 <ScalarProperty Name="IsDele" ColumnName="IsDele" />
                 <ScalarProperty Name="CreateTime" ColumnName="CreateTime" />
                 <ScalarProperty Name="ModifyTime" ColumnName="ModifyTime" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="MovieInfoes">
+            <EntityTypeMapping TypeName="MarsProjectModel.MovieInfo">
+              <MappingFragment StoreEntitySet="MovieInfo">
+                <ScalarProperty Name="ModifyTime" ColumnName="ModifyTime" />
+                <ScalarProperty Name="CreateTime" ColumnName="CreateTime" />
+                <ScalarProperty Name="IsDele" ColumnName="IsDele" />
+                <ScalarProperty Name="UEContent" ColumnName="UEContent" />
+                <ScalarProperty Name="Duration" ColumnName="Duration" />
+                <ScalarProperty Name="Genre" ColumnName="Genre" />
+                <ScalarProperty Name="Direction" ColumnName="Direction" />
+                <ScalarProperty Name="Cast" ColumnName="Cast" />
+                <ScalarProperty Name="Rating" ColumnName="Rating" />
+                <ScalarProperty Name="Image" ColumnName="Image" />
+                <ScalarProperty Name="NameEn" ColumnName="NameEn" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
