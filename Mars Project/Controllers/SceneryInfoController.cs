@@ -17,6 +17,7 @@ namespace Mars_Project.Controllers
             return View();
         }
 
+        [HttpPost]
         public ActionResult Select(int page, int limit) {
             var db = new MPEntities();
 
