@@ -15,6 +15,8 @@
     <link href="~/Content/HomeAssets/css/font-awesome.min.css" rel="stylesheet" />
     <link href="~/Content/HomeAssets/css/isotope.css" rel="stylesheet" />
     <link href="~/Content/HomeAssets/css/style.css" rel="stylesheet" />
+    <link href="~/Content/share/dist/css/share.min.css" rel="stylesheet" />
+
 </head>
 <body>
     <!-- Fixed navbar -->
@@ -51,11 +53,12 @@
         <div class="container">
             <div class="social text-center">
                 @*分享功能暂时空缺*@
-                <a href="#"><i class="fa fa-twitter"></i></a>
+                @*<a href="#"><i class="fa fa-twitter"></i></a>
                 <a href="#"><i class="fa fa-facebook"></i></a>
                 <a href="#"><i class="fa fa-dribbble"></i></a>
                 <a href="#"><i class="fa fa-flickr"></i></a>
-                <a href="#"><i class="fa fa-github"></i></a>
+                <a href="#"><i class="fa fa-github"></i></a>*@
+                <div class="social-share" data-sites="weibo, qq, qzone, facebook, twitter, google"></div>
             </div>
 
             <div class="clear"></div>
@@ -95,6 +98,19 @@
 
     <script src="~/Scripts/jquery-3.3.1.min.js"></script>
 
+    <script src="~/Content/share/dist/js/jquery.share.min.js"></script>
+
+    <script>
+        var $config = {
+            title: '~快来和我一起火星探险吧~',
+            source: '~快来和我一起火星探险吧~',
+            description: '~快来和我一起火星探险吧~',
+            image: 'https://dss1.baidu.com/6ONXsjip0QIZ8tyhnq/it/u=2656792054,3993381461&fm=85&app=52&f=JPEG?w=121&h=75&s=2E018646CE5F2A4F46274CA90300B00A'
+        };
+
+        $('.social-share').share($config);
+    </script>
+
     <script>
         let limitNavMenu = 11; //Max
         let pageNavMenu = 1;
@@ -109,7 +125,7 @@
             , success: function (res) {
                 if (res.code == 0) {
                     console.log(window.location.pathname);
-                   
+
                     for (var i = 0; i < res.data.length; i++) {
                         if (window.location.pathname == "/") {
                             window.location.href += res.data[0].LinkAddress.substring(1, res.data[0].LinkAddress.length);
@@ -119,7 +135,7 @@
                         if (res.data[i].LinkAddress == window.location.pathname) {
                             $('#myTopBanner').attr('src', res.data[i].TopBanner);
                         }
-                        
+
                     }
                 }
             }

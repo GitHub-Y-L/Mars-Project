@@ -244,6 +244,19 @@
     <Content Include="Content\HomeAssets\portfolio\img8.jpg" />
     <Content Include="Content\HomeAssets\portfolio\img9.jpg" />
     <Content Include="Content\movie-style.css" />
+    <Content Include="Content\share\.gitignore" />
+    <Content Include="Content\share\demo\test-jquery.html" />
+    <Content Include="Content\share\demo\test-no-jquery.html" />
+    <Content Include="Content\share\dist\css\share.min.css" />
+    <Content Include="Content\share\dist\fonts\iconfont.svg" />
+    <Content Include="Content\share\dist\js\jquery.share.min.js" />
+    <Content Include="Content\share\dist\js\social-share.min.js" />
+    <Content Include="Content\share\gulpfile.js" />
+    <Content Include="Content\share\src\fonts\iconfont.svg" />
+    <Content Include="Content\share\src\js\jquery.qrcode.min.js" />
+    <Content Include="Content\share\src\js\jquery.share.js" />
+    <Content Include="Content\share\src\js\qrcode.js" />
+    <Content Include="Content\share\src\js\social-share.js" />
     <Content Include="Content\ueditor\dialogs\anchor\anchor.html" />
     <Content Include="Content\ueditor\dialogs\attachment\attachment.css" />
     <Content Include="Content\ueditor\dialogs\attachment\attachment.html" />
@@ -662,6 +675,17 @@
     <Content Include="Models\Model1.edmx.diagram">
       <DependentUpon>Model1.edmx</DependentUpon>
     </Content>
+    <Content Include="Content\share\bower.json" />
+    <Content Include="Content\share\dist\fonts\iconfont.eot" />
+    <Content Include="Content\share\dist\fonts\iconfont.ttf" />
+    <Content Include="Content\share\dist\fonts\iconfont.woff" />
+    <Content Include="Content\share\LICENSE" />
+    <Content Include="Content\share\package.json" />
+    <Content Include="Content\share\README.md" />
+    <Content Include="Content\share\src\css\share.scss" />
+    <Content Include="Content\share\src\fonts\iconfont.eot" />
+    <Content Include="Content\share\src\fonts\iconfont.ttf" />
+    <Content Include="Content\share\src\fonts\iconfont.woff" />
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.3.1.js" />
     <Content Include="Scripts\jquery-3.3.1.min.js" />

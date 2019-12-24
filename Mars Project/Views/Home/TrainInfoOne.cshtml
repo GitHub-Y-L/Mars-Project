@@ -27,6 +27,9 @@
         $("#title").text('@info.Title');
         $("#tiMeta").text('文章编写于 @info.CreateTime');
         $("#content").html(HTMLDecode('@info.UEValue'));
+
+        $('#myTopBanner').attr('src', '@info.TopBanner');
+
         
         function HTMLEncode(html) {
             var temp = document.createElement("div");
