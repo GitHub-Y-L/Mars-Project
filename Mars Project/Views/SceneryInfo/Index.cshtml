@@ -22,12 +22,13 @@
         var table = layui.table;
         var $ = layui.jquery;
 
-       mytable = table.render({
+        mytable = table.render({
             elem: '#test'
             , method: 'post'
             , toolbar: '#toolbarDemo'
             , url: '/SceneryInfo/Select' //数据接口
             , page: true //开启分页
+            , height: 700
             , cols: [[ //表头
                 { field: 'Id', title: 'ID', sort: true, fixed: 'left' }
                 , { field: 'Title', title: '景点标题' }
@@ -124,7 +125,7 @@
                         }
                     });
                 });
-            }else if (obj.event === 'update') {
+            } else if (obj.event === 'update') {
                 layer.open({
                     type: 2
                     , title: "修改景点"

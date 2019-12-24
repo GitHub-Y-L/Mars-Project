@@ -1,7 +1,7 @@
 ﻿@{
     ViewBag.Title = "Index";
 }
-<h2>后台人员</h2>
+<h2>导航菜单管理</h2>
 
 <table class="layui-hide" id="test" lay-filter="test"></table>
 
@@ -26,48 +26,50 @@
 
         mytable = table.render({
             elem: '#test'
-           , url: '/NavMenu/GetPageData' //表格中显示的数据【服务端请求地址】
-           , method: 'post'  //请求数据的方式
-           , toolbar: '#toolbarDemo' //开启头部工具栏，并为其绑定左侧模板
-           , defaultToolbar: null
-           , title: '导航菜单数据表'
-           , cols: [[
-             { type: 'checkbox', fixed: 'left' }
-             , { field: 'Id', title: 'ID', width: 50, fixed: 'left', unresize: true }
-             , { field: 'MenuName', title: '菜单名', width: 120 }
+            , url: '/NavMenu/GetPageData' //表格中显示的数据【服务端请求地址】
+            , method: 'post'  //请求数据的方式
+            , toolbar: '#toolbarDemo' //开启头部工具栏，并为其绑定左侧模板
+            , defaultToolbar: null
+            , title: '导航菜单数据表'
+            , height: 700
+            , cols: [[
+                { type: 'checkbox', fixed: 'left' }
+                , { field: 'Id', title: 'ID', width: 50, fixed: 'left', unresize: true }
+                , { field: 'MenuName', title: '菜单名', width: 120 }
 
-             , { field: 'LinkAddress', title: '链接地址' }
-             , { field: 'OrderBy', title: '顺序号', width: 100 }
-             , { field: 'CreaterId', title: '创建人' }
-               , {
-                   field: 'CreateTime', title: '创建时间', templet: function (r) {
-                       var val = r.CreateTime;
-                       if (val != null) {
-                           var date = new Date(parseInt(val.replace("/Date(", "").replace(")/", ""), 10));
-                           //月份为0-11，所以+1，月份小于10时补个0
-                           var month = date.getMonth() + 1 < 10 ? "0" + (date.getMonth() + 1) : date.getMonth() + 1;
-                           var currentDate = date.getDate() < 10 ? "0" + date.getDate() : date.getDate();
-                           return date.getFullYear() + "-" + month + "-" + currentDate;
-                       }
-                       return "";
-                   }
-               }
-                   ,{ field:'ModifyerId', title:'修改人Id'}
-                   ,{ field:'ModifyTime', title:'修改人时间',templet: function (r)  {
-                       var val2 = r.ModifyTime;
-                       if (val2 != null) {
-                           var date = new Date(parseInt(val2.replace("/Date(", "").replace(")/", ""), 10));
-                           //月份为0-11，所以+1，月份小于10时补个0
-                           var month = date.getMonth() + 1 < 10 ? "0" + (date.getMonth() + 1) : date.getMonth() + 1;
-                           var currentDate = date.getDate() < 10 ? "0" + date.getDate() : date.getDate();
-                           return date.getFullYear() + "-" + month + "-" + currentDate;
-                       }
-                       return "";
-                   }
-               }
-             , { fixed: 'right', title: '操作', toolbar: '#barDemo', width: 150 }//数据操作按钮
-           ]]
-           , page: true //显示分页
+                , { field: 'LinkAddress', title: '链接地址' }
+                , { field: 'OrderBy', title: '顺序号', width: 100 }
+                , { field: 'CreaterId', title: '创建人' }
+                , {
+                    field: 'CreateTime', title: '创建时间', templet: function (r) {
+                        var val = r.CreateTime;
+                        if (val != null) {
+                            var date = new Date(parseInt(val.replace("/Date(", "").replace(")/", ""), 10));
+                            //月份为0-11，所以+1，月份小于10时补个0
+                            var month = date.getMonth() + 1 < 10 ? "0" + (date.getMonth() + 1) : date.getMonth() + 1;
+                            var currentDate = date.getDate() < 10 ? "0" + date.getDate() : date.getDate();
+                            return date.getFullYear() + "-" + month + "-" + currentDate;
+                        }
+                        return "";
+                    }
+                }
+                , { field: 'ModifyerId', title: '修改人Id' }
+                , {
+                    field: 'ModifyTime', title: '修改人时间', templet: function (r) {
+                        var val2 = r.ModifyTime;
+                        if (val2 != null) {
+                            var date = new Date(parseInt(val2.replace("/Date(", "").replace(")/", ""), 10));
+                            //月份为0-11，所以+1，月份小于10时补个0
+                            var month = date.getMonth() + 1 < 10 ? "0" + (date.getMonth() + 1) : date.getMonth() + 1;
+                            var currentDate = date.getDate() < 10 ? "0" + date.getDate() : date.getDate();
+                            return date.getFullYear() + "-" + month + "-" + currentDate;
+                        }
+                        return "";
+                    }
+                }
+                , { fixed: 'right', title: '操作', toolbar: '#barDemo', width: 150 }//数据操作按钮
+            ]]
+            , page: true //显示分页
         });
 
         //头工具栏事件
@@ -81,7 +83,7 @@
                         , title: '添加用户信息'
                         , content: '/NavMenu/AddNavMenu'
                         , area: ['500px', '400px']
-                        , btn: ['保存', '取消', ]
+                        , btn: ['保存', '取消',]
                         , yes: function (index, layero) {
                             //按钮【保存】的回调
                             //调用 弹出层中的方法
@@ -96,11 +98,11 @@
 
                             //return false 开启该代码可禁止点击该按钮关闭
                         }
-                         , cancel: function () {
-                             //右上角关闭回调
+                        , cancel: function () {
+                            //右上角关闭回调
 
-                             //return false 开启该代码可禁止点击该按钮关闭
-                         }
+                            //return false 开启该代码可禁止点击该按钮关闭
+                        }
 
                     });
                     break;
@@ -140,7 +142,7 @@
                     , title: '修改用户信息'
                     , content: '/NavMenu/ModeifyNavMenu/' + data.Id
                     , area: ['500px', '400px']
-                    , btn: ['保存', '取消', ]
+                    , btn: ['保存', '取消',]
                     , yes: function (index, layero) {
                         //按钮【保存】的回调
                         //调用 弹出层中的方法
@@ -155,11 +157,11 @@
 
                         //return false 开启该代码可禁止点击该按钮关闭
                     }
-                     , cancel: function () {
-                         //右上角关闭回调
+                    , cancel: function () {
+                        //右上角关闭回调
 
-                         //return false 开启该代码可禁止点击该按钮关闭
-                     }
+                        //return false 开启该代码可禁止点击该按钮关闭
+                    }
 
                 });
             }

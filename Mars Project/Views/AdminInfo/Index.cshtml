@@ -2,7 +2,7 @@
 @{
     ViewBag.Title = "Index";
 }
-<h2>后台用户表</h2>
+<h2>后台用户管理</h2>
 <table class="layui-hide" id="test" lay-filter="test"></table>
 
 <script type="text/html" id="toolbarDemo">
@@ -20,27 +20,28 @@
 
 <script>
     var mytable = null;
-    layui.use(['table','jquery'], function () {
+    layui.use(['table', 'jquery'], function () {
         var table = layui.table;
         var $ = layui.jquery;
 
-       mytable=table.render({
+        mytable = table.render({
             elem: '#test'
-          , url: '/AdminInfo/GetPageData' //表格中显示的数据【服务端请求地址】
-          , method: 'post'  //请求数据的方式
-          , toolbar: '#toolbarDemo' //开启头部工具栏，并为其绑定左侧模板
-          , defaultToolbar: null
-          , title: '用户数据表'
-          , cols: [[
-            { type: 'checkbox', fixed: 'left' }
-            , { field: 'Id', title: 'ID', width: 80, fixed: 'left', unresize: true }
-            , { field: 'UserName', title: '用户名', width: 120 }
+            , url: '/AdminInfo/GetPageData' //表格中显示的数据【服务端请求地址】
+            , method: 'post'  //请求数据的方式
+            , toolbar: '#toolbarDemo' //开启头部工具栏，并为其绑定左侧模板
+            , defaultToolbar: null
+            , height: 700
+            , title: '用户数据表'
+            , cols: [[
+                { type: 'checkbox', fixed: 'left' }
+                , { field: 'Id', title: 'ID', width: 80, fixed: 'left', unresize: true }
+                , { field: 'UserName', title: '用户名', width: 120 }
 
-            , { field: 'Password', title: '密码', minWidth: 100 }
+                , { field: 'Password', title: '密码', minWidth: 100 }
 
-            , { fixed: 'right', title: '操作', toolbar: '#barDemo', width: 150 }//数据操作按钮
-          ]]
-          , page: true //显示分页
+                , { fixed: 'right', title: '操作', toolbar: '#barDemo', width: 150 }//数据操作按钮
+            ]]
+            , page: true //显示分页
         });
 
         //头工具栏事件
@@ -53,8 +54,8 @@
                         type: 2  // 弹出框类型：2-Iframe
                         , title: '添加用户信息'
                         , content: '/AdminInfo/AddStu'
-                        , area: ['500px','400px']
-                        , btn: ['保存', '取消', ]
+                        , area: ['500px', '400px']
+                        , btn: ['保存', '取消',]
                         , yes: function (index, layero) {
                             //按钮【保存】的回调
                             //调用 弹出层中的方法
@@ -69,10 +70,10 @@
 
                             //return false 开启该代码可禁止点击该按钮关闭
                         }
-                         , cancel: function () {
-                        //右上角关闭回调
+                        , cancel: function () {
+                            //右上角关闭回调
 
-                        //return false 开启该代码可禁止点击该按钮关闭
+                            //return false 开启该代码可禁止点击该按钮关闭
                         }
 
                     });
@@ -92,7 +93,7 @@
                         url: '/AdminInfo/DoDele'//异步提交地址
                         , type: 'post'//提交方式
                         , dataType: 'json'//返回值得数据格式
-                        , data: {id:data.Id}//提交的数据
+                        , data: { id: data.Id }//提交的数据
                         , success: function (res) {
                             //请求成功后，服务端返回的结果
                             if (res.code > 0) {
@@ -111,9 +112,9 @@
                 layer.open({
                     type: 2  // 弹出框类型：2-Iframe
                     , title: '修改用户信息'
-                    , content: '/AdminInfo/ModeifyStu/'+data.Id
+                    , content: '/AdminInfo/ModeifyStu/' + data.Id
                     , area: ['500px', '400px']
-                    , btn: ['保存', '取消', ]
+                    , btn: ['保存', '取消',]
                     , yes: function (index, layero) {
                         //按钮【保存】的回调
                         //调用 弹出层中的方法
@@ -128,11 +129,11 @@
 
                         //return false 开启该代码可禁止点击该按钮关闭
                     }
-                     , cancel: function () {
-                         //右上角关闭回调
+                    , cancel: function () {
+                        //右上角关闭回调
 
-                         //return false 开启该代码可禁止点击该按钮关闭
-                     }
+                        //return false 开启该代码可禁止点击该按钮关闭
+                    }
 
                 });
             }
