@@ -22,7 +22,7 @@
           <Property Name="NameEn" Type="nvarchar" MaxLength="100" />
           <Property Name="Image" Type="nvarchar" MaxLength="260" />
           <Property Name="Rating" Type="float" />
-          <Property Name="Cast" Type="nvarchar" MaxLength="250" />
+          <Property Name="Cast" Type="nvarchar" MaxLength="500" />
           <Property Name="Direction" Type="nvarchar" MaxLength="250" />
           <Property Name="Genre" Type="nvarchar" MaxLength="250" />
           <Property Name="Duration" Type="nvarchar" MaxLength="250" />
@@ -148,7 +148,7 @@
           <Property Name="NameEn" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
           <Property Name="Image" Type="String" MaxLength="260" FixedLength="false" Unicode="true" />
           <Property Name="Rating" Type="Double" />
-          <Property Name="Cast" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="Cast" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
           <Property Name="Direction" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
           <Property Name="Genre" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
           <Property Name="Duration" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
