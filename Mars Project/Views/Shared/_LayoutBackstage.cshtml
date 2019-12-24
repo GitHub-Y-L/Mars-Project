@@ -18,10 +18,20 @@
             <ul class="layui-nav layui-layout-right">
                 <li class="layui-nav-item">
                     <a href="javascript:;">
-                    </a>
 
+                        @{
+                            Mars_Project.Models.AdminInfo info = Session["admin"] as Mars_Project.Models.AdminInfo;
+                            if (info == null) {
+                                Response.Redirect("/Login/Index");
+                            } else {
+                                <text> @info.UserName </text>
+                            }
+
+                        }
+
+                    </a>
                 </li>
-                <li class="layui-nav-item"><a href="/Home/Index">退出系统</a></li>
+                <li class="layui-nav-item"><a href="/Login/SignOut">退出系统</a></li>
             </ul>
         </div>
 
@@ -29,9 +39,10 @@
             <div class="layui-side-scroll">
                 <!-- 左侧导航区域（可配合layui已有的垂直导航） -->
                 <ul class="layui-nav layui-nav-tree" lay-filter="test">
-                    <li class="layui-nav-item"><a href="#">导航菜单管理</a></li>
-                    <li class="layui-nav-item"><a href="/SceneryInfo/Index">景点管理</a></li>
-                    <li class="layui-nav-item"><a href="/TrainInfo/">旅游培训管理</a></li>
+                    <li class="layui-nav-item"><a href="/AdminInfo/">管理用户</a></li>
+                    <li class="layui-nav-item"><a href="/NavMenu/">导航菜单管理</a></li>
+                    <li class="layui-nav-item"><a href="/SceneryInfo/">景点管理</a></li>
+                    <li class="layui-nav-item"><a href="/TrainInfo/">旅游指南管理</a></li>
                 </ul>
             </div>
         </div>

@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="MarsProjectModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="MarsProjectModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="AdminInfo">
           <Key>
             <PropertyRef Name="Id" />
@@ -36,7 +36,7 @@
           <Property Name="Title" Type="nvarchar" MaxLength="50" />
           <Property Name="Value" Type="nvarchar" MaxLength="200" />
           <Property Name="TopBanner" Type="nvarchar" MaxLength="250" />
-          <Property Name="UEValue" Type="nvarchar" MaxLength="2000" />
+          <Property Name="UEValue" Type="nvarchar(max)" />
           <Property Name="IsDele" Type="int" Nullable="false" />
           <Property Name="CreateTime" Type="datetime" />
           <Property Name="ModifyTime" Type="datetime" />
@@ -49,7 +49,7 @@
           <Property Name="Title" Type="nvarchar" MaxLength="50" />
           <Property Name="Value" Type="nvarchar" MaxLength="200" />
           <Property Name="TopBanner" Type="nvarchar" MaxLength="250" />
-          <Property Name="UEValue" Type="nvarchar" MaxLength="2000" />
+          <Property Name="UEValue" Type="nvarchar(max)" />
           <Property Name="IsDele" Type="int" Nullable="false" />
           <Property Name="CreateTime" Type="datetime" />
           <Property Name="ModifyTime" Type="datetime" />
@@ -60,8 +60,7 @@
           <EntitySet Name="SceneryInfo" EntityType="Self.SceneryInfo" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TrainInfo" EntityType="Self.TrainInfo" Schema="dbo" store:Type="Tables" />
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="MarsProjectModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -96,7 +95,7 @@
           <Property Name="Title" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="Value" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
           <Property Name="TopBanner" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
-          <Property Name="UEValue" Type="String" MaxLength="2000" FixedLength="false" Unicode="true" />
+          <Property Name="UEValue" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="IsDele" Type="Int32" Nullable="false" />
           <Property Name="CreateTime" Type="DateTime" Precision="3" />
           <Property Name="ModifyTime" Type="DateTime" Precision="3" />
@@ -109,7 +108,7 @@
           <Property Name="Title" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="Value" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
           <Property Name="TopBanner" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
-          <Property Name="UEValue" Type="String" MaxLength="2000" FixedLength="false" Unicode="true" />
+          <Property Name="UEValue" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="IsDele" Type="Int32" Nullable="false" />
           <Property Name="CreateTime" Type="DateTime" Precision="3" />
           <Property Name="ModifyTime" Type="DateTime" Precision="3" />

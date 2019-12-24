@@ -1,0 +1,121 @@
+﻿
+@{
+    ViewBag.Title = "ModeifyNavMenu";
+}
+<link href="~/layui/css/layui.css" rel="stylesheet" />
+<script src="~/layui/layui.js"></script>
+<form class="layui-form" action="" style="margin-top:20px" id="form1">
+    <input type="hidden" name="Id" value="@Model.Id" />
+    <div class="layui-form-item">
+        <label class="layui-form-label">菜单名</label>
+        <div class="layui-input-inline">
+            <input type="text" name="MenuName" value="@Model.MenuName" required lay-verify="required" placeholder="请输入菜单名" autocomplete="off" class="layui-input">
+        </div>
+    </div>
+
+    <div class="layui-form-item">
+        <label class="layui-form-label">图片</label>
+        @* 验证图片必须选择 lay-verify="required" lay-reqtext="必须选择图片" 没有选择图片时的提示信息*@
+        <input type="hidden" id="pic" required lay-verify="required" value="@Model.TopBanner" lay-reqtext="必须选择图片" />
+        <div class="layui-input-inline">
+            <div class="layui-upload">
+                <button type="button" class="layui-btn" id="test1">上传图片</button>
+                <div class="layui-upload-list">
+                    <img class="layui-upload-img" id="imgShow" src="@Model.TopBanner" style="height:150px;width:150px">
+                    <p id="demoText"></p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="layui-form-item">
+        <label class="layui-form-label">链接地址</label>
+        <div class="layui-input-inline">
+            <input type="text" name="LinkAddress" value="@Model.LinkAddress" required lay-verify="required" placeholder="请输入链接地址" autocomplete="off" class="layui-input">
+        </div>
+        <div class="layui-form-mid layui-word-aux"> </div>
+    </div>
+
+    <div class="layui-form-item">
+        <label class="layui-form-label">排序序号</label>
+        <div class="layui-input-inline">
+            <input type="text" name="OrderBy" value="@Model.OrderBy" required lay-verify="required|number" placeholder="请输入排序序号" autocomplete="off" class="layui-input">
+        </div>
+        <div class="layui-form-mid layui-word-aux"> </div>
+    </div>
+    <div class="layui-form-item" style=" display:none">
+        <div class="layui-input-block">
+            <button class="layui-btn" lay-submit lay-filter="formDemo" id="btnSave">立即提交</button>
+            <button type="reset" class="layui-btn layui-btn-primary">重置</button>
+        </div>
+    </div>
+    <input type="hidden" name="CreateTime" value="@Model.CreateTime">
+    <input type="hidden" name="CreaterId" value="@Model.CreaterId">
+
+
+</form>
+
+<script>
+    //Demo
+    //父页面调用
+    function save() {
+        layui.use('jquery', function () {
+            var $ = layui.jquery;
+
+            $("#btnSave").click();
+
+        });
+    }
+
+    //初始化表单使用
+    layui.use(['form', 'jquery', 'upload'], function () {
+        var form = layui.form
+            , $ = layui.jquery
+            , upload = layui.upload;
+
+        //监听提交
+        form.on('submit(formDemo)', function (data) {
+            $.ajax({
+                url: '/NavMenu/DoModifyNavMenu' //提交的地址
+                , type: 'post' //提交的方式
+                , data: new FormData($("#form1")[0])  //提交的数据
+                , dataType: 'json' // 返回值类型
+                , contentType: false
+                , processData: false
+                , success: function (res) { //请求成功时执行
+                    if (res.code > 0) {
+                        layer.alert('修改成功！', function (index) {
+                            layer.close(index);
+
+                            //关闭父级页面的Iframe
+                            var index = parent.layer.getFrameIndex(window.name); //先得到当前iframe层的索引
+                            parent.layer.close(index); //再执行关闭
+                            //父级页面  表格没有刷新
+                            parent.mytable.reload();
+                        });
+
+                    }
+                }
+            });
+            return false;
+        });
+
+        var uploadInst = upload.render({
+            elem: '#test1'
+            , auto: false
+            , choose: function (obj) {
+
+                //预读本地文件示例，不支持ie8
+                obj.preview(function (index, file, result) {
+                    $('#imgShow').attr('src', result); //图片链接（base64）
+                    $("#pic").val("已选择图片");
+                });
+            }
+        });
+
+
+
+    });
+
+
+</script>

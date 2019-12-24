@@ -33,5 +33,10 @@ namespace Mars_Project.Controllers
             }
 
         }
+
+        public ActionResult SignOut() {
+            Session["admin"] = null;
+            return Redirect("/");
+        }
     }
 }

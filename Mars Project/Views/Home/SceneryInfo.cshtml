@@ -1,0 +1,77 @@
+﻿
+@{
+    /**/
+
+    ViewBag.Title = "SceneryInfo";
+}
+<!-- container -->
+<section class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <section id="portfolio" class="page-section section appear clearfix">
+                <br />
+                <br />
+                <p>
+                    <h2 style="text-align: center">千年之梦，此刻，近在咫尺</h2>
+                    <br />
+                    <br />
+                </p>
+
+
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="row">
+                                <div id="imgcontent">
+                                </div>
+                         </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </div>
+
+</section>
+<!-- /container -->
+
+@section scripts{
+    <script>
+        
+            laodData();
+            //定义加载数据的方法
+            function laodData(obj) {
+                let limit = 10;
+                let page = 1;
+                $.ajax({
+                    url: '/SceneryInfo/Select',//请求地址
+                    dataType: 'json',//数据格式
+                    type: 'post',//请求方式
+                    data: {
+                        limit: limit,
+                        page: page
+                    },
+                    success: function (si) {   //如果发送成功
+                        var html = '';
+                        for (var i = 0; i <si.data.length; i++) {    //遍历data数组
+                            html += '<a href="./SceneryInfoOne/' + si.data[i].Id + '">' +
+                                    '<article class="col-sm-4 isotopeItem webdesign">' +
+                                    '<div class="portfolio-item">' +
+                                    '<img style="width:400px;height:170px;margin:10px" src="' + si.data[i].TopBanner + '" alt="" />' +
+                                    '<div class="portfolio-desc align-center" style="width:360px;height:170px;margin:10px">' +
+                                    '<div class="folio-info">' +
+                                    '<h5>' + si.data[i].Title + '</h5>' +
+                                    '<h6 style="text-align:center">' + si.data[i].Value + '</h6>' +
+                                    '</a>' +
+                                    '</div>' +
+                                    '</div>' +
+                                    '</div>' +
+                                    '</article>';
+                        }
+                        $('#imgcontent').html(html); //在html页面id=ulul的标签里显示html内容
+
+                    }
+                });
+
+            }
+        
+    </script>
+}

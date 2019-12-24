@@ -1,0 +1,49 @@
+﻿
+@{
+    ViewBag.Title = "TrainInfoOne";
+}
+
+<link href="~/Content/HomeAssets/css/clean-blog.min.css" rel="stylesheet" />
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+
+            <h1 id="title"></h1>
+            <span class="meta" id="tiMeta"></span>
+            <hr />
+            <div id="content"></div>
+        </div>
+    </div>
+</div>
+
+<script src="~/Content/ueditor/ueditor.parse.min.js"></script>
+
+@section scripts{
+    <script>
+
+        @{ 
+            Mars_Project.Models.TrainInfo info = ViewBag.TrainInfoOne as Mars_Project.Models.TrainInfo;
+        }
+
+        $("#title").text('@info.Title');
+        $("#tiMeta").text('文章编写于 @info.CreateTime');
+        $("#content").html(HTMLDecode('@info.UEValue'));
+        
+        function HTMLEncode(html) {
+            var temp = document.createElement("div");
+            (temp.textContent != null) ? (temp.textContent = html) : (temp.innerText = html);
+            var output = temp.innerHTML;
+            temp = null;
+            return output;
+        }
+        function HTMLDecode(text) {
+            var temp = document.createElement("div");
+            temp.innerHTML = text;
+            var output = temp.innerText || temp.textContent;
+            temp = null;
+            return output;
+        }
+
+    </script>
+}

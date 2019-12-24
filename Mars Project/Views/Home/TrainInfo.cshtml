@@ -2,47 +2,72 @@
 
 <div class="container">
     <div class="row">
-        <div class="col-lg-8 offset-lg-2 col-md-10 offset-md-1">
-            <div class="post-preview">
-                <a href="post.html">
-                    <h2 class="post-title">
-                        我们吃在火星
-                    </h2>
-                    <h3 class="post-subtitle">
-                        在遥远的火星，我们该怎么吃？
-                    </h3>
-                </a>
-                <p class="post-meta">文章由 <a href="#">张二狗</a> 写于2019年12月13日</p>
-                <hr />
-            </div>
+        <div class="col-lg-8 offset-lg-2 col-md-10 offset-md-1" id="trainInfoList">
 
-
-            <div class="post-preview">
-                <a href="posk.html">
-                    <h2 class="post-title">
-                        震惊，火星上我们居然住在这里！
-                    </h2>
-                    <h3 class="post-subtitle">
-                        我们来到火星之后，万万没想想到，我们居然住在这里.......
-                    </h3>
-                </a>
-                <p class="post-meta">文章由 <a href="#">陈震惊</a> 写于2019年12月13日</p>
-                <hr />
-            </div>
-
-            <div class="post-preview">
-                <a href="losk.html">
-                    <h2 class="post-title">
-                        有一说一，火星上交通真的.......
-                    </h2>
-                    <h3 class="post-subtitle">
-                        难道就我一人认为火星交通.......
-                    </h3>
-                </a>
-                <p class="post-meta">文章由 <a href="#">普通游客</a> 写于2019年12月13日</p>
-                <hr />
-            </div>
+            @*<div class="post-preview">
+                    <a href="post.html">
+                        <h2 class="post-title">
+                            我们吃在火星
+                        </h2>
+                        <h3 class="post-subtitle">
+                            在遥远的火星，我们该怎么吃？
+                        </h3>
+                    </a>
+                    <p class="post-meta">文章由 <a href="#">张二狗</a> 写于2019年12月13日</p>
+                    <hr />
+                </div>*@
 
         </div>
     </div>
 </div>
+
+@section scripts{
+    <script>
+
+        let limit = 100;
+        let page = 1;
+        $.ajax({
+            url: '/TrainInfo/GetPageInfo'
+            , type: 'post'
+            , data: {
+                limit: limit,
+                page: page
+            }
+            , dataType: 'json' // 返回值类型
+            , success: function (res) {
+                if (res.code == 0) {
+                    let content = '';
+                    console.log(res.data.length);
+
+                    for (var i = 0; i < res.data.length; i++) {
+                        content += '    <div class="post-preview">'
+                            + '                <a href="./TrainInfoOne/' + res.data[i].Id + '">'
+                            + '                    <h2 class="post-title">'
+                            + res.data[i].Title
+                            + '                    </h2>'
+                            + '                    <h3 class="post-subtitle">'
+                            + res.data[i].Value
+                            + '                    </h3>'
+                            + '                </a>'
+                            + '                <p class="post-meta">文章<a href="#"></a>编写于 ' + dateFormat(res.data[i].CreateTime) + '</p>'
+                            + '                <hr />'
+                            + '            </div>';
+                    }
+
+                    $('#trainInfoList').html(content);
+                }
+            }
+        });
+
+
+        function dateFormat(val) {
+            if (val != null) {
+                let date = new Date(parseInt(val.replace("/Date(", "").replace(")/", ""), 10));
+                let month = date.getMonth() + 1 < 10 ? "0" + (date.getMonth() + 1) : date.getMonth() + 1;
+                let currentDate = date.getDate() < 10 ? "0" + date.getDate() : date.getDate();
+                return date.getFullYear() + "-" + month + "-" + currentDate;
+            }
+            return "";
+        }
+    </script>
+}

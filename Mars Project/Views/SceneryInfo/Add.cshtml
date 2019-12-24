@@ -23,9 +23,11 @@
     <div class="layui-form-item">
         <label class="layui-form-label">图片</label>
         <div class="layui-input-block">
-            <button type="button" class="layui-btn" id="test1">
-                <i class="layui-icon">&#xe67c;</i>上传图片
-            </button>
+            <button type="button" class="layui-btn" id="test1">上传图片 </button>
+            <div class="layui-upload-list">
+                <img class="layui-upload-img" id="demo1" style="height:150px;width:150px">
+                <p id="demoText"></p>
+            </div>
         </div>
     </div>
     <div class="layui-form-item">
@@ -92,6 +94,7 @@
 
                             var index = parent.layer.getFrameIndex(window.name); //先得到当前iframe层的索引
                             parent.layer.close(index); //再执行关闭
+                            parent.mytable.reload();
                         });
 
                         return;
