@@ -27,7 +27,6 @@
         }
 
         $("#title").text('@Model.Title');
-        $("#tiMeta").text('文章编写于 @Model.CreateTime');
         $("#content").html(HTMLDecode('@Model.UEValue'));
 
         function HTMLEncode(html) {

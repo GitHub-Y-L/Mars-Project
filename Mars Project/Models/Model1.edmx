@@ -36,7 +36,7 @@
           <Property Name="Title" Type="nvarchar" MaxLength="50" />
           <Property Name="Value" Type="nvarchar" MaxLength="200" />
           <Property Name="TopBanner" Type="nvarchar" MaxLength="250" />
-          <Property Name="UEValue" Type="nvarchar" MaxLength="2000" />
+          <Property Name="UEValue" Type="nvarchar(max)" />
           <Property Name="IsDele" Type="int" Nullable="false" />
           <Property Name="CreateTime" Type="datetime" />
           <Property Name="ModifyTime" Type="datetime" />
@@ -95,7 +95,7 @@
           <Property Name="Title" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="Value" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
           <Property Name="TopBanner" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
-          <Property Name="UEValue" Type="String" MaxLength="2000" FixedLength="false" Unicode="true" />
+          <Property Name="UEValue" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="IsDele" Type="Int32" Nullable="false" />
           <Property Name="CreateTime" Type="DateTime" Precision="3" />
           <Property Name="ModifyTime" Type="DateTime" Precision="3" />
