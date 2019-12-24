@@ -4,30 +4,30 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-    <Schema xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl" Alias="Self" Namespace="MarsProjectModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012">
+    <Schema Namespace="MarsProjectModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="AdminInfo">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
-          <Property Name="Id" Nullable="false" StoreGeneratedPattern="Identity" Type="int" />
-          <Property Name="UserName" Nullable="false" MaxLength="36" Type="nvarchar" />
-          <Property Name="Password" Nullable="false" MaxLength="24" Type="nvarchar" />
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="UserName" Type="nvarchar" MaxLength="36" Nullable="false" />
+          <Property Name="Password" Type="nvarchar" MaxLength="24" Nullable="false" />
         </EntityType>
         <EntityType Name="MovieInfo">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
-          <Property Name="Id" Nullable="false" StoreGeneratedPattern="Identity" Type="int" />
-          <Property Name="Name" MaxLength="100" Type="nvarchar" />
-          <Property Name="NameEn" MaxLength="100" Type="nvarchar" />
-          <Property Name="Image" MaxLength="260" Type="nvarchar" />
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="100" />
+          <Property Name="NameEn" Type="nvarchar" MaxLength="100" />
+          <Property Name="Image" Type="nvarchar" MaxLength="260" />
           <Property Name="Rating" Type="float" />
-          <Property Name="Cast" MaxLength="250" Type="nvarchar" />
-          <Property Name="Direction" MaxLength="250" Type="nvarchar" />
-          <Property Name="Genre" MaxLength="250" Type="nvarchar" />
-          <Property Name="Duration" MaxLength="250" Type="nvarchar" />
-          <Property Name="UEContent" MaxLength="2000" Type="nvarchar" />
-          <Property Name="IsDele" Nullable="false" Type="int" />
+          <Property Name="Cast" Type="nvarchar" MaxLength="250" />
+          <Property Name="Direction" Type="nvarchar" MaxLength="250" />
+          <Property Name="Genre" Type="nvarchar" MaxLength="250" />
+          <Property Name="Duration" Type="nvarchar" MaxLength="250" />
+          <Property Name="ReLink" Type="nvarchar" MaxLength="2000" />
+          <Property Name="IsDele" Type="int" Nullable="false" />
           <Property Name="CreateTime" Type="datetime" />
           <Property Name="ModifyTime" Type="datetime" />
         </EntityType>
@@ -35,12 +35,12 @@
           <Key>
             <PropertyRef Name="Id" />
           </Key>
-          <Property Name="Id" Nullable="false" StoreGeneratedPattern="Identity" Type="int" />
-          <Property Name="MenuName" Nullable="false" MaxLength="50" Type="nvarchar" />
-          <Property Name="LinkAddress" MaxLength="250" Type="nvarchar" />
-          <Property Name="TopBanner" MaxLength="250" Type="nvarchar" />
-          <Property Name="OrderBy" Nullable="false" Type="int" />
-          <Property Name="IsDele" Nullable="false" Type="int" />
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="MenuName" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="LinkAddress" Type="nvarchar" MaxLength="250" />
+          <Property Name="TopBanner" Type="nvarchar" MaxLength="250" />
+          <Property Name="OrderBy" Type="int" Nullable="false" />
+          <Property Name="IsDele" Type="int" Nullable="false" />
           <Property Name="CreaterId" Type="int" />
           <Property Name="CreateTime" Type="datetime" />
           <Property Name="ModifyerId" Type="int" />
@@ -50,12 +50,12 @@
           <Key>
             <PropertyRef Name="Id" />
           </Key>
-          <Property Name="Id" Nullable="false" StoreGeneratedPattern="Identity" Type="int" />
-          <Property Name="Title" MaxLength="50" Type="nvarchar" />
-          <Property Name="Value" MaxLength="200" Type="nvarchar" />
-          <Property Name="TopBanner" MaxLength="250" Type="nvarchar" />
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Title" Type="nvarchar" MaxLength="50" />
+          <Property Name="Value" Type="nvarchar" MaxLength="200" />
+          <Property Name="TopBanner" Type="nvarchar" MaxLength="250" />
           <Property Name="UEValue" Type="nvarchar(max)" />
-          <Property Name="IsDele" Nullable="false" Type="int" />
+          <Property Name="IsDele" Type="int" Nullable="false" />
           <Property Name="CreateTime" Type="datetime" />
           <Property Name="ModifyTime" Type="datetime" />
         </EntityType>
@@ -63,12 +63,12 @@
           <Key>
             <PropertyRef Name="Id" />
           </Key>
-          <Property Name="Id" Nullable="false" StoreGeneratedPattern="Identity" Type="int" />
-          <Property Name="Title" MaxLength="50" Type="nvarchar" />
-          <Property Name="Value" MaxLength="200" Type="nvarchar" />
-          <Property Name="TopBanner" MaxLength="250" Type="nvarchar" />
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Title" Type="nvarchar" MaxLength="50" />
+          <Property Name="Value" Type="nvarchar" MaxLength="200" />
+          <Property Name="TopBanner" Type="nvarchar" MaxLength="250" />
           <Property Name="UEValue" Type="nvarchar(max)" />
-          <Property Name="IsDele" Nullable="false" Type="int" />
+          <Property Name="IsDele" Type="int" Nullable="false" />
           <Property Name="CreateTime" Type="datetime" />
           <Property Name="ModifyTime" Type="datetime" />
         </EntityType>
@@ -152,7 +152,7 @@
           <Property Name="Direction" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
           <Property Name="Genre" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
           <Property Name="Duration" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
-          <Property Name="UEContent" Type="String" MaxLength="2000" FixedLength="false" Unicode="true" />
+          <Property Name="ReLink" Type="String" MaxLength="2000" FixedLength="false" Unicode="true" />
           <Property Name="IsDele" Type="Int32" Nullable="false" />
           <Property Name="CreateTime" Type="DateTime" Precision="3" />
           <Property Name="ModifyTime" Type="DateTime" Precision="3" />
@@ -222,7 +222,7 @@
                 <ScalarProperty Name="ModifyTime" ColumnName="ModifyTime" />
                 <ScalarProperty Name="CreateTime" ColumnName="CreateTime" />
                 <ScalarProperty Name="IsDele" ColumnName="IsDele" />
-                <ScalarProperty Name="UEContent" ColumnName="UEContent" />
+                <ScalarProperty Name="ReLink" ColumnName="ReLink" />
                 <ScalarProperty Name="Duration" ColumnName="Duration" />
                 <ScalarProperty Name="Genre" ColumnName="Genre" />
                 <ScalarProperty Name="Direction" ColumnName="Direction" />

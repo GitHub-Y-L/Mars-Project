@@ -124,7 +124,7 @@ namespace Mars_Project.Controllers
             tempOriginal.Direction = movieInfo.Direction;
             tempOriginal.Genre = movieInfo.Genre;
             tempOriginal.Duration = movieInfo.Duration;
-            tempOriginal.UEContent = movieInfo.UEContent;
+            tempOriginal.ReLink = movieInfo.ReLink;
             tempOriginal.IsDele = movieInfo.IsDele;
 
             tempOriginal.ModifyTime = DateTime.Now;

@@ -23,7 +23,7 @@ namespace Mars_Project.Models
         public string Direction { get; set; }
         public string Genre { get; set; }
         public string Duration { get; set; }
-        public string UEContent { get; set; }
+        public string ReLink { get; set; }
         public int IsDele { get; set; }
         public Nullable<System.DateTime> CreateTime { get; set; }
         public Nullable<System.DateTime> ModifyTime { get; set; }

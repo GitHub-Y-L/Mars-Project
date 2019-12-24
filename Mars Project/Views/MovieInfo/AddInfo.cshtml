@@ -8,9 +8,6 @@
 </style>
 
 <div class="DialogContent">
-    <script src="~/Content/ueditor/ueditor.config.js"></script>
-    <script src="~/Content/ueditor/ueditor.all.min.js"></script>
-    <script src="~/Content/ueditor/lang/zh-cn/zh-cn.js"></script>
 
     <form class="layui-form" action="" style="margin-top:20px" id="form1">
         <div class="layui-form-item">
@@ -78,19 +75,17 @@
             <div class="layui-form-mid layui-word-aux"> </div>
         </div>
 
-        <textarea id="UEContent" name="UEContent"></textarea>
+        <div class="layui-form-item">
+            <label class="layui-form-label">转跳链接</label>
+            <div class="layui-input-block">
+                <input type="text" name="ReLink" required lay-verify="required" autocomplete="off" class="layui-input">
+            </div>
+            <div class="layui-form-mid layui-word-aux"> </div>
+        </div>
+
         <button id="SubmitBtn" style="display:none" class="layui-btn" lay-submit lay-filter="formDemo">提交</button>
     </form>
 
-    <script type="text/javascript">
-        var editor = new baidu.editor.ui.Editor({
-            initialContent: '请编辑内容',//初始化编辑器内容
-            autoHeightEnabled: false,//高度自动增长
-            minFrameHeight: 700,//最小高度
-            initialFrameHeight: 300
-        });
-        editor.render('UEContent');
-    </script>
 
 </div>
 
