@@ -6,6 +6,7 @@
     <title>@ViewBag.Title</title>
     @* 引入layui的CSS样式 *@
     <link href="~/layui/css/layui.css" rel="stylesheet" />
+    <link href="~/Content/admin.css" rel="stylesheet" />
     @* 引入layui 的 js *@
     <script src="~/layui/layui.js"></script>
 </head>
@@ -36,10 +37,16 @@
         </div>
 
         <div class="layui-side layui-bg-black">
+
             <div class="layui-side-scroll">
                 <!-- 左侧导航区域（可配合layui已有的垂直导航） -->
-                <ul class="layui-nav layui-nav-tree" lay-filter="test">
-                    @*<li class="layui-nav-item"><a href="/Backstage/">主页</a></li>*@
+                <div class="layui-logo" lay-href="">
+                    <span>1111111111111</span>
+                </div>
+
+                <ul class="layui-nav layui-nav-tree" lay-shrink="all" id="LAY-system-side-menu" lay-filter="test" style="margin-top:49px;">
+
+                    <li class="layui-nav-item"><a href="/Backstage/">主页</a></li>
                     <li class="layui-nav-item"><a href="/AdminInfo/">管理用户</a></li>
                     <li class="layui-nav-item"><a href="/NavMenu/">导航菜单管理</a></li>
                     <li class="layui-nav-item"><a href="/SceneryInfo/">景点管理</a></li>
@@ -49,7 +56,7 @@
             </div>
         </div>
 
-        <div class="layui-body">
+        <div class="layui-body" style="margin-top: -50px;">
             <!-- 内容主体区域 -->
             <div style="padding: 15px;">
 
@@ -71,5 +78,7 @@
 
         });
     </script>
+
+    @RenderSection("scripts", required: false)
 </body>
 </html>
