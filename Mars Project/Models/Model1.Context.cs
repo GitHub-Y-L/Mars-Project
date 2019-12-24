@@ -29,5 +29,6 @@ namespace Mars_Project.Models
         public virtual DbSet<NavMenu> NavMenus { get; set; }
         public virtual DbSet<SceneryInfo> SceneryInfoes { get; set; }
         public virtual DbSet<TrainInfo> TrainInfoes { get; set; }
+        public virtual DbSet<MovieInfo> MovieInfoes { get; set; }
     }
 }
