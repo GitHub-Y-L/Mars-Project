@@ -46,12 +46,12 @@
                 , { field: 'Id', title: 'ID', width: 80, fixed: 'left', unresize: true, sort: true }
                 , { field: 'Name', title: '标题', width: 120 }               
                 , {
-                    field: 'Image', title: '图片', minWidth: 80, templet: function (r) {
+                    field: 'Image', title: '图片', width: 80, templet: function (r) {
                         return '<img src="' + r.Image + '" />';
                     }
                 }
                 , { field: 'Rating', title: '评分', width: 80 }
-                , { field: 'Cast', title: '演员', width: 120 }
+                , { field: 'Cast', title: '演员', minWidth: 120 }
                 , { field: 'Direction', title: '导演', width: 120 }
                 , { field: 'Genre', title: '类型', width: 120 }
                 , { field: 'Duration', title: '影片时常', width: 120 }
