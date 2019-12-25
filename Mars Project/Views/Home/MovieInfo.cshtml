@@ -1,0 +1,115 @@
+﻿
+@{
+    ViewBag.Title = "MovieInfo";
+}
+<link href="~/Content/movie-style.css" rel="stylesheet" />
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <div id="content">
+
+                @*<div class="review">
+                        <div class="movie-pic">
+                            <a href="single.html"><img src="http://demo.cssmoban.com/cssthemes3/cpts_40_ei/images/r4.jpg" alt=""></a>
+                        </div>
+                        <div class="review-info">
+                            <a class="span" href="single.html">电影名</a>
+                            <p class="dirctr">Reagan Gavin Rasquinha</p>
+                            <p class="ratingview c-rating">评分:</p>
+                            <div class="rating c-rating">
+                                <span>☆</span>
+                                <span>☆</span>
+                                <span>☆</span>
+                                <span>☆</span>
+                                <span>☆</span>
+                            </div>
+                            <p class="ratingview c-rating">
+                                &nbsp; 3.3/5
+                            </p>
+                            <div class="clearfix"></div>
+
+                            <p class="info">演员: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 威尔·史密斯，玛格特·罗比，阿德里安·马丁内斯，罗德里戈·桑托罗，黄光荣，罗伯特·泰勒</p>
+                            <p class="info">导演: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Glenn Ficarra, John Requa</p>
+                            <p class="info">类型: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Crime</p>
+                            <p class="info">影片时常: &nbsp;&nbsp;&nbsp; &nbsp; 1小时45分钟</p>
+                        </div>
+                        <div class="clearfix"></div>
+                    </div>*@
+
+
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+@section scripts{
+    <script>
+
+        let limit = 12;
+        let page = 1;
+        $.ajax({
+            url: '/MovieInfo/GetPageInfo'
+            , type: 'post'
+            , data: {
+                limit: limit,
+                page: page
+            }
+            , dataType: 'json' // 返回值类型
+            , success: function (res) {
+                if (res.code == 0) {
+                    let content = '';
+                    console.log(res.data.length);
+
+                    for (let i = 0; i < res.data.length; i++) {
+                        let ratingBuild = "";
+                        for (let j = 0; j < res.data[i].Rating; j++) {
+                            ratingBuild += "<span>☆</span>\n";
+                        }
+
+
+                        content += "         <div class=\"review\">\n" +
+                            "                    <div class=\"movie-pic\">\n" +
+                            "                        <a target=\"_blank\" href=\"" + res.data[i].ReLink + "\"><img src=\"" + res.data[i].Image + "\" alt=\"\"></a>\n" +
+                            "                    </div>\n" +
+                            "                    <div class=\"review-info\">\n" +
+                            "                        <a class=\"span\" target=\"_blank\" href=\"" + res.data[i].ReLink + "\">" + res.data[i].Name + "</a>\n" +
+                            "                        <p class=\"dirctr\">" + res.data[i].NameEn + "</p>\n" +
+                            "                        <p class=\"ratingview c-rating\">评分:</p>\n" +
+                            "                        <div class=\"rating c-rating\">\n" +
+                            ratingBuild +
+                            "                        </div>\n" +
+                            "                        <p class=\"ratingview c-rating\">\n" +
+                            "                            &nbsp; " + res.data[i].Rating + "/5\n" +
+                            "                        </p>\n" +
+                            "                        <div class=\"clearfix\"></div>\n" +
+                            "\n" +
+                            "                        <p class=\"info\">演员: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; " + res.data[i].Cast + "</p>\n" +
+                            "                        <p class=\"info\">导演: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; " + res.data[i].Direction + "</p>\n" +
+                            "                        <p class=\"info\">类型: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; " + res.data[i].Genre + "</p>\n" +
+                            "                        <p class=\"info\">影片时常: &nbsp;&nbsp;&nbsp; &nbsp; " + res.data[i].Duration + "</p>\n" +
+                            "                    </div>\n" +
+                            "                    <div class=\"clearfix\"></div>\n" +
+                            "                </div>";
+                    }
+
+                    $('#content').html(content);
+                }
+            }
+        });
+
+
+        function dateFormat(val) {
+            if (val != null) {
+                let date = new Date(parseInt(val.replace("/Date(", "").replace(")/", ""), 10));
+                let month = date.getMonth() + 1 < 10 ? "0" + (date.getMonth() + 1) : date.getMonth() + 1;
+                let currentDate = date.getDate() < 10 ? "0" + date.getDate() : date.getDate();
+                return date.getFullYear() + "-" + month + "-" + currentDate;
+            }
+            return "";
+        }
+    </script>
+}
