@@ -15,27 +15,31 @@ namespace Mars_Project.Controllers
             return View();
         }
 
-        public ActionResult About() {
+        public ActionResult About()
+        {
             return View();
         }
 
         public ActionResult SceneryInfo()
         {
             return View();
-        }        
+        }
 
-        public ActionResult SceneryInfoOne(int id) {
+        public ActionResult SceneryInfoOne(int id)
+        {
             var db = new MPEntities();
             SceneryInfo scenery = db.SceneryInfoes.Where(s => s.Id == id && s.IsDele == 0).FirstOrDefault();
 
             return View(scenery);
         }
 
-        public ActionResult TrainInfo() {
+        public ActionResult TrainInfo()
+        {
             return View();
         }
 
-        public ActionResult TrainInfoOne(int id) {
+        public ActionResult TrainInfoOne(int id)
+        {
             var db = new MPEntities();
             TrainInfo info = db.TrainInfoes
                 .Where(s => s.IsDele == 0 && s.Id == id)
@@ -45,7 +49,13 @@ namespace Mars_Project.Controllers
             return View();
         }
 
-        public ActionResult MovieInfo() {
+        public ActionResult MovieInfo()
+        {
+            return View();
+        }
+
+        public ActionResult Course()
+        {
             return View();
         }
 
